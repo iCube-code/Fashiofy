@@ -8,19 +8,12 @@ import Layout from './Components/Layout'
 
 
 function App() {
-  
-
   return (
-    <>
-      <div>
         <Routes>
           <Route element={<Layout />}>
           <Route path='/' element={<HomePage/>}/>
-          
           </Route>
         </Routes>
-      </div>
-    </>
   )
 }
 
