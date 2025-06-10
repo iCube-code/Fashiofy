@@ -5,15 +5,16 @@ import './App.css'
 import { Routes, Route } from 'react-router-dom'
 import HomePage from './Pages/HomePage'
 import Layout from './Components/Layout'
+import Footer from './Components/Layout/Footer'
 
 
 function App() {
   return (
-        <Routes>
-          <Route element={<Layout />}>
-          <Route path='/' element={<HomePage/>}/>
-          </Route>
-        </Routes>
+    <Routes>
+      <Route element={<Layout />}>
+        <Route path='/' element={<HomePage />} />
+      </Route>
+    </Routes>
   )
 }
 
