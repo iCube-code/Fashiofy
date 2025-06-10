@@ -7,13 +7,14 @@ import HomePage from './Pages/HomePage'
 import Layout from './Components/Layout'
 
 
+
 function App() {
   return (
-        <Routes>
-          <Route element={<Layout />}>
-          <Route path='/' element={<HomePage/>}/>
-          </Route>
-        </Routes>
+    <Routes>
+      <Route element={<Layout />}>
+        <Route path='/' element={<HomePage />} />
+      </Route>
+    </Routes>
   )
 }
 
