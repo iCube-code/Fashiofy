@@ -3,6 +3,7 @@ import { FaFacebook, FaTwitter, FaYoutube, FaInstagram, FaBagShopping, FaGift, F
 import { RxRocket } from "react-icons/rx";
 import { GoMention } from "react-icons/go";
 import Images from '../../assets/dev.svg'
+import './footer.css'
 
 const Footer = () => {
     return (

@@ -1,5 +1,5 @@
 import React from 'react'
-import Footer from '../Components/Layout/Footer'
+import Footer from '../Components/Footer/Footer'
 
 function HomePage() {
   return (
