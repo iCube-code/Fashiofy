@@ -1,6 +1,7 @@
 import React, { Suspense } from "react";
 import HoodieCanvas from "../Components/Layout/HoodieCanvas";
 
+
 function Home() {
   return (
     <div className="flex flex-col-reverse lg:flex-row items-center justify-between px-4 md:px-12 lg:px-24 py-16 gap-10">
@@ -24,7 +25,7 @@ function Home() {
           <HoodieCanvas />
         </Suspense>
       </div>
-    </div>
+      </div>
   );
 }
 
