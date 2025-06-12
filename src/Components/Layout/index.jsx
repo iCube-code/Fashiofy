@@ -1,5 +1,6 @@
 import React from 'react'
 import { Outlet } from 'react-router-dom'
+import Footer from "../Footer/Footer"
 
 
 function Layout() {
@@ -11,6 +12,7 @@ function Layout() {
             <Outlet/> 
         </main>        
         {/* Add Footer Component Here */}
+        <Footer />
     </div>   
    
     </>
