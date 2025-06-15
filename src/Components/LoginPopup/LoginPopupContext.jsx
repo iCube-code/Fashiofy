@@ -1,23 +1,24 @@
-import React , {createContext, useState} from "react";
+import { createContext, useState } from "react";
 
 const LoginPopupContext = createContext()
 
-const LoginPopupProvider = ({children}) => {
+const LoginPopupProvider = ({ children }) => {
+
     const [open, setOpen] = useState(false)
 
-     function handleOpen(){
+    function handleOpen() {
         setOpen(true)
     }
 
-     function handleClose(){
+    function handleClose() {
         setOpen(false)
     }
 
-    return(
-        <LoginPopupContext.Provider value={{open, handleOpen, handleClose}}>
+    return (
+        <LoginPopupContext.Provider value={{ open, handleOpen, handleClose }}>
             {children}
         </LoginPopupContext.Provider>
     )
 }
 
-export {LoginPopupContext, LoginPopupProvider}
+export { LoginPopupContext, LoginPopupProvider }

@@ -11,6 +11,7 @@ import { GrRestroomWomen } from "react-icons/gr";
 import { FaChildReaching, FaBoxOpen } from "react-icons/fa6";
 
 const SideNav = () => {
+
     const [user, setUser] = useState({ name: "Devika" });
 
     return (
@@ -76,17 +77,17 @@ const SideNav = () => {
 
             {/* User Section */}
             <div className="p-4 border-t border-gray-700">
-                {user ? (
+                {user?.name ? (
                     <div className="flex items-center gap-3">
                         <div className="w-10 h-10 bg-gray-600 rounded-full flex items-center justify-center text-white text-sm">
                             {user.avatar ? (
                                 <img
-                                    src={user.avatar}
+                                    src={user?.avatar}
                                     alt="avatar"
                                     className="w-10 h-10 rounded-full object-cover"
                                 />
                             ) : (
-                                <span>{user.name.charAt(0)}</span>
+                                <span>{user?.name.charAt(0)}</span>
                             )}
                         </div>
                         <span className="text-sm font-medium truncate">{user.name}</span>
