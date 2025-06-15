@@ -1,0 +1,14 @@
+@layer utilities {
+    ::-webkit-scrollbar {
+        width: 3px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background-color: #222222;
+        border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: #f2f2f2;
+    }
+}
