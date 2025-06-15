@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import logo from '../../assets/logo-1.jpeg';
+import { Link } from 'react-router-dom';
 import { RxDashboard } from "react-icons/rx";
 import { TbBrandProducthunt } from "react-icons/tb";
 import { MdOutlineReviews } from "react-icons/md";
@@ -17,7 +18,9 @@ const SideNav = () => {
         <div className='w-56 h-screen bg-black text-white flex flex-col justify-between mb-1'>
             {/* Logo */}
             <div className='p-4 border-b border-zinc-700'>
+                <Link to='/'>
                 <img src={logo} alt="Logo" className='w-40 mx-auto' />
+                </Link>
             </div>
 
             {/* Nav Sections */}
@@ -46,9 +49,9 @@ const SideNav = () => {
                     <div className='flex items-center gap-3 py-2 cursor-pointer px-2 hover:bg-gray-700 rounded'>
                         <RxDashboard /> <span>Dashboard</span>
                     </div>
-                    <a href='Products' className='flex items-center gap-3 py-2 hover:bg-gray-700 rounded px-2'>
+                    <Link to="/products"  className='flex items-center gap-3 py-2 hover:bg-gray-700 rounded px-2'>
                         <TbBrandProducthunt /> <span>Products</span>
-                    </a>
+                    </Link>
                     <a href='Reviews' className='flex items-center gap-3 py-2 hover:bg-gray-700 rounded px-2'>
                         <MdOutlineReviews /> <span>Reviews</span>
                     </a>
