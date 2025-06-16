@@ -1,5 +1,5 @@
 import React, { Suspense, useContext } from "react";
-import HoodieCanvas from "../Components/Layout/HoodieCanvas";
+import HoodieCanvas from "../Components/Model_3D/HoodieCanvas";
 import { LoginPopupContext } from "../Components/LoginPopup/LoginPopupContext";
 
 function Home() {
