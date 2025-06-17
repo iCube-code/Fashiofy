@@ -7,7 +7,6 @@ import HomePage from "./Pages/HomePage";
 import Layout from "./Components/Layout";
 import LoginPopup from "./Components/LoginPopup/LoginPopup";
 import { LoginPopupProvider } from "./Components/LoginPopup/LoginPopupContext";
-import RegisterPage from "./Pages/RegisterPage";
 
 function App() {
   return (
@@ -15,7 +14,6 @@ function App() {
       <Routes>
         <Route element={<Layout />}>
           <Route path="/" element={<HomePage />} />
-          <Route path="/register" element={<RegisterPage />} />
         </Route>
       </Routes>
       <LoginPopup />

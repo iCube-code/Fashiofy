@@ -6,7 +6,7 @@ import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import InputLabel from "@mui/material/InputLabel";
 
-function RegisterPage() {
+function RegisterPage({ onClose }) {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [countryCode, setCountryCode] = useState("+91");
@@ -16,10 +16,10 @@ function RegisterPage() {
   };
 
   return (
-    <div className="fixed inset-0 text-white bg-black/60 flex justify-center items-center">
+    <div className="fixed inset-0 text-white bg-black/70 flex justify-center items-center">
       <div className="bg-[linear-gradient(125deg,_#7b356d,_#86584a)] p-5 rounded-lg shadow-lg w-[640px] max-h-[90vh] overflow-y-auto flex flex-col gap-5">
         <div className="flex flex-col items-center">
-          <button className="place-self-end cursor-pointer">
+          <button className="place-self-end cursor-pointer" onClick={onClose}>
             <IoMdClose size={30} />
           </button>
           <div>

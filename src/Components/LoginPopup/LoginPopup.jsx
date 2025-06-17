@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import {
   Dialog,
@@ -14,21 +14,26 @@ import { ImGithub } from "react-icons/im";
 import { SiFacebook } from "react-icons/si";
 import { AiOutlineClose } from "react-icons/ai";
 import { LoginPopupContext } from "./LoginPopupContext";
+import RegisterPage from "../../Pages/RegisterPage";
 
 function LoginPopup() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const { open, handleClose } = useContext(LoginPopupContext);
-
-  if (!open) return null;
+  const {
+    open,
+    handleClose,
+    openRegisterPopUp,
+    onClickOpenRegisterPopup,
+    onClickCloseRegisterPopUp,
+  } = useContext(LoginPopupContext);
 
   return (
-    <div>
+    <>
       <Dialog open={open} onClose={handleClose} className="dialog">
         <div className="dialog-box">
           <Button onClick={handleClose} className="dialog-close">
-            {<AiOutlineClose size={25} />}
+            <AiOutlineClose size={25} />
           </Button>
 
           <DialogTitle className="dialog-title">
@@ -78,10 +83,25 @@ function LoginPopup() {
               {<SiFacebook size={30} />}
             </button>
           </DialogActions>
-          <button>Create Account</button>
+          <div className="flex justify-center">
+            <button
+              className="text-white cursor-pointer mt-3"
+              onClick={() => {
+                handleClose(); 
+                onClickOpenRegisterPopup(); 
+              }}
+            >
+              Create Account
+            </button>
+          </div>
         </div>
       </Dialog>
-    </div>
+
+      {/* Render Register modal independently */}
+      {openRegisterPopUp && (
+        <RegisterPage onClose={onClickCloseRegisterPopUp} />
+      )}
+    </>
   );
 }
 
