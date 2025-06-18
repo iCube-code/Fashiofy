@@ -5,6 +5,7 @@ import Layout from './Components/Layout'
 import LoginPopup from './Components/LoginPopup/LoginPopup'
 import { LoginPopupProvider } from './Components/LoginPopup/LoginPopupContext'
 import Products from './Screens/Products/Products'
+import Wishlist from './Components/Wishlist/Wishlist'
 
 
 function App() {
@@ -14,6 +15,8 @@ function App() {
         <Route element={<Layout />}>
           <Route path='/' element={<HomePage />} />
           <Route path='/products' element={<Products />} />
+          <Route path='/Wishlist' element={<Wishlist />}/>
+          {/* <Route path='/Cart' element={<Cart />}/> */}
         </Route>
       </Routes>
       <LoginPopup />
