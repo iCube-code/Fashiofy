@@ -1,10 +1,10 @@
 import React, { Suspense, useContext } from "react";
-import HoodieCanvas from "../Components/Layout/HoodieCanvas";
+import HoodieCanvas from "../Components/Model_3D/HoodieCanvas";
 import { LoginPopupContext } from "../Components/LoginPopup/LoginPopupContext";
 
 function Home() {
 
-  const {handleOpen} = useContext(LoginPopupContext)  
+  const { handleOpen } = useContext(LoginPopupContext)
 
   return (
     <div className="flex flex-col-reverse lg:flex-row items-center justify-between px-4 md:px-12 lg:px-24 py-16 gap-10">
@@ -28,7 +28,7 @@ function Home() {
           <HoodieCanvas />
         </Suspense>
       </div>
-      </div>
+    </div>
   );
 }
 

@@ -1,30 +1,20 @@
-import React from 'react'
 import { Outlet } from 'react-router-dom'
 import Footer from "../Footer/Footer"
 import SideNav from '../Sidebar/SideNav'
-import Home from '../../Pages/HomePage'
-
 
 function Layout() {
   return (
-    <>
-      <div className='flex '>
-        {/* Add Header Component Here */}
-        <div className>
-          <SideNav />
-        </div>
-        <div className>
-          <main>
-            <Outlet />
-          </main>
-          {/* Add Footer Component Here */}
-        </div>
+    <div className='flex'>
+      {/* Add Header Component Here */}
+      <div className='h-screen'>
+        <SideNav />
       </div>
-      <div>
+      <div className='h-screen flex flex-col justify-between overflow-y-scroll scrollbar-thin scrollbar-thumb-red-500 scrollbar-track-gray-200'>
+        <Outlet />
+        {/* Add Footer Component Here */}
         <Footer />
       </div>
-
-    </>
+    </div>
   )
 }
 
