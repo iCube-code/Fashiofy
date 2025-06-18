@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { fashiofyData } from "../../data/index";
+import { CiCirclePlus,CiCircleMinus } from "react-icons/ci";
 
 function Wishlist() {
   const [wishlistProducts, setWishlistProducts] = useState(
@@ -55,19 +56,19 @@ function Wishlist() {
             ₹{product.price}
           </div>
           <div>
-            <div className="inline-flex border rounded items-center">
+            <div className="flex items-center ">
               <button
-                className="px-2 text-lg cursor-pointer"
+                className="text-xl cursor-pointer "
                 onClick={() => decrementQty(product.id)}
               >
-                -
+                <CiCircleMinus className="text-2xl text-[#d49b6d]" />
               </button>
-              <span className="px-3">{product.qty}</span>
+              <span className="px-2">{product.qty}</span>
               <button
-                className="px-2 text-lg cursor-pointer"
+                className="text-xl cursor-pointer "
                 onClick={() => incrementQty(product.id)}
               >
-                +
+               <CiCirclePlus className="text-[#d49b6d] text-2xl "/>
               </button>
             </div>
           </div>
