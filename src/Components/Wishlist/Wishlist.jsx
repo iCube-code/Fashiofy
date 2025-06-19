@@ -26,7 +26,7 @@ function Wishlist() {
   return (
     <div className="mx-auto p-4">
       <h1 className="text-3xl font-bold mb-6">Wishlist</h1>
-      <div className="grid grid-cols-[2fr_1fr_1fr_1fr_1fr_auto] font-semibold border-b pb-3 text-gray-700 text-sm sm:text-base">
+      <div className="grid grid-cols-[2fr_1fr_1fr_1fr_1fr_auto] font-semibold border-b pb-3 text-gray-700 text-sm sm:text-base shadow-md">
         <div>Item</div>
         <div>Price</div>
         <div>Quantity</div>
