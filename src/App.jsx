@@ -5,6 +5,7 @@ import Layout from "./Components/Layout";
 import LoginPopup from "./Components/LoginPopup/LoginPopup";
 import Products from "./Screens/Products/Products";
 import RegisterPage from "./Pages/RegisterPage";
+import Wishlist from "./Components/Wishlist/Wishlist";
 
 import { AuthContext, AuthProvider } from "./context/AuthContext";
 import { useContext } from "react";
@@ -19,6 +20,8 @@ function AppContent() {
         <Route element={<Layout />}>
           <Route path="/" element={<HomePage />} />
           <Route path="/products" element={<Products />} />
+          <Route path="/Wishlist" element={<Wishlist />} />
+          {/* <Route path='/Cart' element={<Cart />}/> */}
         </Route>
       </Routes>
 
