@@ -1,10 +1,10 @@
 import { createContext, useState } from "react";
 
-const LoginPopupContext = createContext();
+const AuthContext = createContext();
 
-const LoginPopupProvider = ({ children }) => {
+const AuthProvider = ({ children }) => {
   const [open, setOpen] = useState(false);
-  const [openRegisterPopUp, setOPenRegisterPopUp] = useState(false);
+  const [openRegisterPopUp, setOpenRegisterPopUp] = useState(false);
 
   function handleOpen() {
     setOpen(true);
@@ -13,15 +13,17 @@ const LoginPopupProvider = ({ children }) => {
   function handleClose() {
     setOpen(false);
   }
+
   function onClickOpenRegisterPopup() {
-    setOPenRegisterPopUp(true);
+    setOpenRegisterPopUp(true);
   }
+
   function onClickCloseRegisterPopUp() {
-    setOPenRegisterPopUp(false);
+    setOpenRegisterPopUp(false);
   }
 
   return (
-    <LoginPopupContext.Provider
+    <AuthContext.Provider
       value={{
         open,
         handleOpen,
@@ -32,8 +34,8 @@ const LoginPopupProvider = ({ children }) => {
       }}
     >
       {children}
-    </LoginPopupContext.Provider>
+    </AuthContext.Provider>
   );
 };
 
-export { LoginPopupContext, LoginPopupProvider };
+export { AuthContext, AuthProvider };

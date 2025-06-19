@@ -13,20 +13,14 @@ import { FcGoogle } from "react-icons/fc";
 import { ImGithub } from "react-icons/im";
 import { SiFacebook } from "react-icons/si";
 import { AiOutlineClose } from "react-icons/ai";
-import { LoginPopupContext } from "./LoginPopupContext";
-import RegisterPage from "../../Pages/RegisterPage";
+import { AuthContext } from "../../context/AuthContext";
 
 function LoginPopup() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const {
-    open,
-    handleClose,
-    openRegisterPopUp,
-    onClickOpenRegisterPopup,
-    onClickCloseRegisterPopUp,
-  } = useContext(LoginPopupContext);
+  const { open, handleClose, onClickOpenRegisterPopup } =
+    useContext(AuthContext);
 
   return (
     <>
@@ -87,8 +81,8 @@ function LoginPopup() {
             <button
               className="text-white cursor-pointer mt-3"
               onClick={() => {
-                handleClose(); 
-                onClickOpenRegisterPopup(); 
+                handleClose();
+                onClickOpenRegisterPopup();
               }}
             >
               Create Account
@@ -96,11 +90,6 @@ function LoginPopup() {
           </div>
         </div>
       </Dialog>
-
-      {/* Render Register modal independently */}
-      {openRegisterPopUp && (
-        <RegisterPage onClose={onClickCloseRegisterPopUp} />
-      )}
     </>
   );
 }
