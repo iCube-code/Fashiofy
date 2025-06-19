@@ -1,10 +1,9 @@
 import React, { Suspense, useContext } from "react";
 import HoodieCanvas from "../Components/Model_3D/HoodieCanvas";
-import { LoginPopupContext } from "../Components/LoginPopup/LoginPopupContext";
+import { AuthContext } from "../context/AuthContext";
 
 function Home() {
-
-  const { handleOpen } = useContext(LoginPopupContext)
+  const { handleOpen } = useContext(AuthContext);
 
   return (
     <div className="flex flex-col-reverse lg:flex-row items-center justify-between px-4 md:px-12 lg:px-24 py-16 gap-10">
@@ -17,7 +16,10 @@ function Home() {
           Discover trendsetting products, seamless design, and a fully immersive
           shopping journey crafted just for you.
         </p>
-        <button onClick={handleOpen} className="mt-6 px-6 py-3 bg-blue-600 text-white font-semibold cursor-pointer rounded-xl hover:bg-blue-700 transition duration-300">
+        <button
+          onClick={handleOpen}
+          className="mt-6 px-6 py-3 bg-blue-600 text-white font-semibold cursor-pointer rounded-xl hover:bg-blue-700 transition duration-300"
+        >
           Shop Now
         </button>
       </div>
