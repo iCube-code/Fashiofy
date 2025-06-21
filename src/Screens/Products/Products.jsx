@@ -66,7 +66,7 @@ function Products() {
               </div>
             </div>
 
-            <button className="mt-4 bg-black text-white py-2 rounded-lg hover:bg-gray-800 transition text-sm">
+            <button className="mt-4 bg-black text-white py-2 rounded-lg cursor-pointer hover:bg-gray-800 transition text-sm">
               Add to Cart
             </button>
           </div>
