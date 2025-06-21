@@ -1,39 +1,39 @@
-import React, { useState, useContext } from "react";
-import { Link } from "react-router-dom";
-import {
-  Dialog,
-  DialogTitle,
-  DialogActions,
-  DialogContent,
-  Button,
-  TextField,
-} from "@mui/material";
-import "./LoginPopup.css";
+import React,{useState, useContext} from 'react'
+import {Link} from 'react-router-dom'
+import {Dialog, DialogTitle, DialogActions, DialogContent, Button, TextField,} from '@mui/material'
+import './LoginPopup.css'
 import { FcGoogle } from "react-icons/fc";
 import { ImGithub } from "react-icons/im";
 import { SiFacebook } from "react-icons/si";
 import { AiOutlineClose } from "react-icons/ai";
 import { AuthContext } from "../../context/AuthContext";
+import Otp from '../OTP';
 
 function LoginPopup() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
 
-  const { open, handleClose, onClickOpenRegisterPopup } =
-    useContext(AuthContext);
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");    
+    const { open, handleClose, onClickOpenRegisterPopup, showOtp, handleOpenOtp, handleCloseOtp } = useContext(AuthContext); 
+     
+    return (
+    <>   
+    <Dialog open={open} className='dialog'
+    onClose={() => {
+    handleClose();
+    handleCloseOtp();}}>
 
-  return (
-    <>
-      <Dialog open={open} onClose={handleClose} className="dialog">
-        <div className="dialog-box">
-          <Button onClick={handleClose} className="dialog-close">
-            <AiOutlineClose size={25} />
-          </Button>
+    {showOtp ? (
+        <Otp />
+    ):( 
 
-          <DialogTitle className="dialog-title">
-            <span>Welcome Back</span>
-            <p>Please enter your Account Details</p>
-          </DialogTitle>
+    <div className='dialog-box'>
+                    
+    <Button onClick={handleClose} className='dialog-close'>{<AiOutlineClose size={25}/>}</Button>
+                    
+            <DialogTitle className='dialog-title'>
+                <span>Welcome Back</span>
+                <p>Please enter your Account Details</p>                                                   
+            </DialogTitle>
 
           <DialogContent className="dialog-content">
             <TextField
@@ -67,31 +67,33 @@ function LoginPopup() {
               <Link>Forgot Password?</Link>
             </div>
 
-            <Button className="sign-in-button">Sign in</Button>
-          </DialogContent>
+                <Button onClick={handleOpenOtp}  className='sign-in-button'>Sign in</Button>
 
-          <DialogActions className="dialog-acions">
-            <button className="google-icon">{<FcGoogle size={30} />}</button>
-            <button className="github-icon">{<ImGithub size={30} />}</button>
-            <button className="facebook-icon">
-              {<SiFacebook size={30} />}
-            </button>
-          </DialogActions>
-          <div className="flex justify-center">
-            <button
-              className="text-white cursor-pointer mt-3"
-              onClick={() => {
-                handleClose();
-                onClickOpenRegisterPopup();
-              }}
-            >
-              Create Account
-            </button>
-          </div>
-        </div>
-      </Dialog>
+                            </DialogContent>
+                
+                            <DialogActions className='dialog-acions'>                               
+                                <button className='google-icon'>{<FcGoogle size={30} />}</button>
+                                <button className='github-icon'>{<ImGithub size={30}/>}</button>
+                                <button className='facebook-icon'>{<SiFacebook size={30} />}</button> 
+                            </DialogActions>
+
+                            <div className="flex justify-center">
+                                <button
+                                className="text-white cursor-pointer mt-3"
+                                onClick={() => {
+                               handleClose();
+                                onClickOpenRegisterPopup();
+                                }}
+                                >
+                                Create Account
+                                </button>
+                                </div>
+                 </div>
+            )
+        }
+            </Dialog>
     </>
-  );
+    )
 }
 
 export default LoginPopup;
