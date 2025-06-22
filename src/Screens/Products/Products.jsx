@@ -1,16 +1,27 @@
 import React, { useState } from "react";
 import { fashiofyData } from "../../data/index";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
+import { useContext } from "react";
+import { AuthContext } from "../../context/AuthContext";
 
 function Products() {
   const [products, setProducts] = useState(fashiofyData);
+  const { isLoggedIn, handleOpen } = useContext(AuthContext);
 
   const toggleWishlist = (id) => {
-    const updatedProducts = products.map((product) =>
-      product.id === id ? { ...product, wishList: !product.wishList } : product
-    );
-    setProducts(updatedProducts);
+    if (!isLoggedIn) {
+      handleOpen(); // Show login popup
+    }
+    if (isLoggedIn) {
+      const updatedProducts = products.map((product) =>
+        product.id === id
+          ? { ...product, wishList: !product.wishList }
+          : product
+      );
+      setProducts(updatedProducts);
+    }
   };
+
 
   return (
     <div className=" mx-auto p-4">
@@ -24,12 +35,19 @@ function Products() {
           >
             <div className="relative aspect-[3/4] overflow-hidden rounded-xl bg-gray-100">
               <img
-                src={product.imgURIs[0]}
+                src={product.imgURIs}
                 alt={product.name}
                 className="w-full h-full object-contain transition-transform duration-300 hover:scale-105"
               />
               <button
-                onClick={() => toggleWishlist(product.id)}
+                onClick={() => {
+                  if (!isLoggedIn) {
+                    handleOpen(); // Show login popup
+                  }
+                  if (isLoggedIn) {
+                    toggleWishlist(product.id);
+                  }
+                }}
                 className="absolute top-2 right-2 text-xl text-red-500 z-10 cursor-pointer"
               >
                 {product.wishList ? <FaHeart /> : <FaRegHeart />}
@@ -66,7 +84,18 @@ function Products() {
               </div>
             </div>
 
-            <button className="mt-4 bg-black text-white py-2 rounded-lg cursor-pointer hover:bg-gray-800 transition text-sm">
+            <button
+              className="mt-4 bg-black text-white py-2 rounded-lg cursor-pointer hover:bg-gray-800 transition text-sm"
+              onClick={() => {
+                if (!isLoggedIn) {
+                  handleOpen(); // Show login popup
+                }
+                if (isLoggedIn) {
+                  // Add to cart logic here
+                  console.log(`Added ${product.name} to cart`);
+                }
+              }}
+            >
               Add to Cart
             </button>
           </div>
