@@ -1,8 +1,12 @@
 import React, { useState } from "react";
 import { fashiofyData } from "../../data/index";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
+
+import Filter from "./Filter";
+
 import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
+
 
 function Products() {
   const [products, setProducts] = useState(fashiofyData);
@@ -25,8 +29,15 @@ function Products() {
 
   return (
     <div className=" mx-auto p-4">
+      <div className="flex items-center justify-between text-center">
       <h1 className="text-3xl font-bold mb-6">Products</h1>
-
+      <span className="text-2xl font-medium mb-6"
+     
+      >
+        <Filter />
+      </span>
+      </div>
+      
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {products.map((product) => (
           <div
