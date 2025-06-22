@@ -6,10 +6,10 @@ import {
   TextField,
   Box,
   Typography,
-  IconButton,
+ 
 } from "@mui/material";
 import { FaFilter } from "react-icons/fa";
-import { AiOutlineClose } from "react-icons/ai";
+
 import Rating from "@mui/material/Rating";
 
 export default function Filter() {

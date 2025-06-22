@@ -12,9 +12,7 @@ import { AuthContext, AuthProvider } from "./context/AuthContext";
 import { useContext } from "react";
 
 function AppContent() {
-  const { openRegisterPopUp, onClickCloseRegisterPopUp } =
-    useContext(AuthContext);
-
+  const { open, openRegisterPopUp } = useContext(AuthContext);
   return (
     <>
       <Routes>
@@ -25,12 +23,8 @@ function AppContent() {
           <Route path='/Cart' element={<Cart />}/>
         </Route>
       </Routes>
-
-      <LoginPopup />
-
-      {openRegisterPopUp && (
-        <RegisterPage onClose={onClickCloseRegisterPopUp} />
-      )}
+      {open && <LoginPopup />}
+      {openRegisterPopUp && <RegisterPage />}
     </>
   );
 }
