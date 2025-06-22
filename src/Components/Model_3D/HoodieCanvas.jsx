@@ -5,12 +5,11 @@ import Model from "./Model";
 
 function HoodieCanvas() {
   return (
-    <Canvas
-    >
+    <Canvas>
       <Suspense fallback={null}>
         <PresentationControls>
           <Stage>
-            <Model />
+            <Model rotation={[0, -Math.PI/2, 0]} />
           </Stage>
         </PresentationControls>
       </Suspense>
