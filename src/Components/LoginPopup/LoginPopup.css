@@ -87,3 +87,15 @@
 .facebook-icon{    
     color: #4267B2 !important;
 }
+
+.password-wrapper {
+  position: relative;
+}
+
+
+.eye-icon {
+  position: absolute;
+  right: 12px;
+  top: 25px;
+  cursor: pointer; 
+}

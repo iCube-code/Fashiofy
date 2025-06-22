@@ -91,7 +91,7 @@ const Footer = () => {
                 </div>
                 <div className='oururl'>
                     <GoMention />
-                    <h4>2007-2025 Fshiofy.com</h4>
+                    <h4>2007-2025 Fashiofy.com</h4>
                 </div>
                 <img src={Images} />
             </div>

@@ -6,15 +6,20 @@ import { FcGoogle } from "react-icons/fc";
 import { ImGithub } from "react-icons/im";
 import { SiFacebook } from "react-icons/si";
 import { AiOutlineClose } from "react-icons/ai";
+import { FaRegEyeSlash, FaRegEye } from "react-icons/fa6";
 import { AuthContext } from "../../context/AuthContext";
 import Otp from '../OTP';
 
 function LoginPopup() {
 
     const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");    
+    const [password, setPassword] = useState("");
+    const [showPassword, setShowPassword] = useState(false);    
     const { open, handleClose, onClickOpenRegisterPopup, showOtp, handleOpenOtp, handleCloseOtp } = useContext(AuthContext); 
-     
+    
+    function handleEyeIcon(){
+      setShowPassword(!showPassword)
+    }
     return (
     <>   
     <Dialog open={open} className='dialog'
@@ -50,11 +55,12 @@ function LoginPopup() {
           fullWidth
         />
 
+        <div className='password-wrapper'>
         <TextField
           className="text-field"
           label="Password"
           id="password"
-          type="password"
+          type={showPassword ? "text" : "password"}
           margin="dense"
           variant="outlined"
           placeholder="Enter Password"
@@ -62,6 +68,11 @@ function LoginPopup() {
           onChange={(e) => setPassword(e.target.value)}
           fullWidth
         />
+
+        <button className='eye-icon' onClick={handleEyeIcon}>
+          {showPassword ? <FaRegEye /> : <FaRegEyeSlash />}
+        </button>
+        </div>
 
         <div className="forget-password">
           <Link>Forgot Password?</Link>
