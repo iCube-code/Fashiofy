@@ -6,8 +6,7 @@ import LoginPopup from "./Components/LoginPopup/LoginPopup";
 import Products from "./Screens/Products/Products";
 import RegisterPage from "./Pages/RegisterPage";
 import Wishlist from "./Components/Wishlist/Wishlist";
-import Cart from "./Components/Cart/Cart"
-
+import Cart from "./Components/Cart/Cart";
 import { AuthContext, AuthProvider } from "./context/AuthContext";
 import { useContext } from "react";
 
@@ -20,7 +19,7 @@ function AppContent() {
           <Route path="/" element={<HomePage />} />
           <Route path="/products" element={<Products />} />
           <Route path="/Wishlist" element={<Wishlist />} />
-          <Route path='/Cart' element={<Cart />}/>
+          <Route path='/Cart' element={<Cart />} />
         </Route>
       </Routes>
       {open && <LoginPopup />}
