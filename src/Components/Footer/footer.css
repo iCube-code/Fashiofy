@@ -1,6 +1,9 @@
 .total {
     background-color: black;
     color: white;
+    font-family: ui-sans-serif, system-ui, sans-serif;
+    font-size: 16px;
+    font-weight: normal;
 }
 
 .footerlist {
@@ -39,23 +42,9 @@ h3 {
     border-top: 1px solid #ccc;
 }
 
-.seller {
+.seller, .advertise, .gift, .question, .oururl {
     display: flex;
-}
-
-
-.advertise {
-    display: flex;
-}
-
-.gift {
-    display: flex;
-}
-
-.question {
-    display: flex;
-}
-
-.oururl {
-    display: flex;
+    gap:7px;
+    justify-content: center;
+    align-items: center;
 }

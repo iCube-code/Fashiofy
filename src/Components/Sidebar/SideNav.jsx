@@ -11,7 +11,7 @@ import { GrRestroomWomen } from "react-icons/gr";
 import { FaChildReaching, FaBoxOpen } from "react-icons/fa6";
 
 const SideNav = () => {
-  const [user, setUser] = useState({ name: "Devika" });
+  const [user, setUser] = useState({ name: "Devika", role: "User" });   {/* role: "Admin" / "Seller" */}
 
   return (
     <div className="w-56 h-screen bg-black text-white flex flex-col justify-between mb-1">
@@ -66,13 +66,15 @@ const SideNav = () => {
           >
             <FaBoxOpen /> <span>Accessories</span>
           </NavLink>
-        </div>
-
-        <hr className="border-gray-700 my-3 mx-4" />
+          <hr className="border-gray-700 my-3 mx-[-16px]" />
+        </div>        
 
         {/* Manage Section */}
         <div className="px-4">
-          <div className="flex items-center gap-3 py-2 cursor-pointer px-2 hover:bg-gray-700 rounded">
+
+        {user?.role === "Seller" && (         
+          <>
+            <div className="flex items-center gap-3 py-2 cursor-pointer px-2 hover:bg-gray-700 rounded">
             <RxDashboard /> <span>Dashboard</span>
           </div>
           <NavLink
@@ -95,7 +97,13 @@ const SideNav = () => {
           >
             <MdOutlineReviews /> <span>Reviews</span>
           </NavLink>
-          <NavLink
+          <hr className="border-gray-700 my-3 mx-[-16px]" />
+          </>
+        )}
+
+        {user?.role === "Admin" && (
+            <>
+            <NavLink
             to="/Users"
             className={({ isActive }) =>
               `flex items-center gap-3 py-2 px-2 rounded transition-colors ${
@@ -105,8 +113,10 @@ const SideNav = () => {
           >
             <FaRegUser /> <span>Users</span>
           </NavLink>
+          <hr className="border-gray-700 my-3 mx-[-16px]" />
+            </>
+          )}
         </div>
-        <hr className="border-gray-700 my-3 mx-4" />
 
         {/* Options Section */}
         <div className="px-4">
