@@ -11,7 +11,7 @@ import { GrRestroomWomen } from "react-icons/gr";
 import { FaChildReaching, FaBoxOpen } from "react-icons/fa6";
 
 const SideNav = () => {
-  const [user, setUser] = useState({ name: "Devika", role: "Seller" }); {/* role: "Admin" */}
+  const [user, setUser] = useState({ name: "Devika", role: "User" });   {/* role: "Admin" / "Seller" */}
 
   return (
     <div className="w-56 h-screen bg-black text-white flex flex-col justify-between mb-1">
@@ -66,9 +66,8 @@ const SideNav = () => {
           >
             <FaBoxOpen /> <span>Accessories</span>
           </NavLink>
-        </div>
-
-        <hr className="border-gray-700 my-3 mx-4" />
+          <hr className="border-gray-700 my-3 mx-[-16px]" />
+        </div>        
 
         {/* Manage Section */}
         <div className="px-4">
@@ -98,6 +97,7 @@ const SideNav = () => {
           >
             <MdOutlineReviews /> <span>Reviews</span>
           </NavLink>
+          <hr className="border-gray-700 my-3 mx-[-16px]" />
           </>
         )}
 
@@ -113,11 +113,10 @@ const SideNav = () => {
           >
             <FaRegUser /> <span>Users</span>
           </NavLink>
+          <hr className="border-gray-700 my-3 mx-[-16px]" />
             </>
           )}
         </div>
-
-        <hr className="border-gray-700 my-3 mx-4" />
 
         {/* Options Section */}
         <div className="px-4">
