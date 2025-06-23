@@ -6,7 +6,8 @@ import LoginPopup from "./Components/LoginPopup/LoginPopup";
 import Products from "./Screens/Products/Products";
 import RegisterPage from "./Pages/RegisterPage";
 import Wishlist from "./Components/Wishlist/Wishlist";
-import Cart from "./Components/Cart/Cart"
+import Cart from "./Components/Cart/Cart";
+import ScrollToTop from "./Components/Layout/scrollToTop";
 
 import { AuthContext, AuthProvider } from "./context/AuthContext";
 import { useContext } from "react";
@@ -15,6 +16,7 @@ function AppContent() {
   const { open, openRegisterPopUp } = useContext(AuthContext);
   return (
     <>
+    <ScrollToTop /> 
       <Routes>
         <Route element={<Layout />}>
           <Route path="/" element={<HomePage />} />

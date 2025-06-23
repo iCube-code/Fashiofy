@@ -9,7 +9,7 @@ function Layout() {
       <div className='h-screen'>
         <SideNav />
       </div>
-      <div className=' w-full h-screen flex flex-col justify-between overflow-y-scroll scrollbar-thin scrollbar-thumb-red-500 scrollbar-track-gray-200'>
+      <div className=' w-full h-screen flex flex-col justify-between overflow-y-scroll scrollbar-thin scrollbar-thumb-red-500 scrollbar-track-gray-200 custom-scroll-container'>
         <Outlet />
         {/* Add Footer Component Here */}
         <Footer />
