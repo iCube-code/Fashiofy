@@ -12,19 +12,17 @@ function Products() {
   const [products, setProducts] = useState(fashiofyData);
   const { isLoggedIn, handleOpen } = useContext(AuthContext);
 
-  const toggleWishlist = (id) => {
-    if (!isLoggedIn) {
-      handleOpen(); // Show login popup
-    }
-    if (isLoggedIn) {
-      const updatedProducts = products.map((product) =>
-        product.id === id
-          ? { ...product, wishList: !product.wishList }
-          : product
-      );
-      setProducts(updatedProducts);
-    }
-  };
+const toggleWishlist = (id) => {
+
+  const updatedProducts = products.map((product) =>
+    product.id === id
+      ? { ...product, wishList: true }
+      : product
+  );
+
+  setProducts(updatedProducts);
+};
+
 
 
   return (
@@ -59,6 +57,7 @@ function Products() {
                     toggleWishlist(product.id);
                   }
                 }}
+
                 className="absolute top-2 right-2 text-xl text-red-500 z-10 cursor-pointer"
               >
                 {product.wishList ? <FaHeart /> : <FaRegHeart />}
