@@ -9,9 +9,12 @@ import { BsCartCheckFill } from "react-icons/bs";
 import { GiCharacter } from "react-icons/gi";
 import { GrRestroomWomen } from "react-icons/gr";
 import { FaChildReaching, FaBoxOpen } from "react-icons/fa6";
+import { useContext } from "react";
+import { AuthContext } from "../../context/AuthContext";
 
 const SideNav = () => {
-  const [user, setUser] = useState({ name: "Devika", role: "User" });   {/* role: "Admin" / "Seller" */}
+  const [user, setUser] = useState({ name: "Devika", role: "User" }); {/* role: "Admin" / "Seller" */ }
+  const { isLoggedIn, handleOpen } = useContext(AuthContext);
 
   return (
     <div className="w-56 h-screen bg-black text-white flex flex-col justify-between mb-1">
@@ -29,8 +32,7 @@ const SideNav = () => {
           <NavLink
             to="/Mens"
             className={({ isActive }) =>
-              `flex items-center gap-3 py-2 px-2 rounded transition-colors ${
-                isActive ? "bg-gray-800 text-white" : "hover:bg-gray-700"
+              `flex items-center gap-3 py-2 px-2 rounded transition-colors ${isActive ? "bg-gray-800 text-white" : "hover:bg-gray-700"
               }`
             }
           >
@@ -39,8 +41,7 @@ const SideNav = () => {
           <NavLink
             to="Womens"
             className={({ isActive }) =>
-              `flex items-center gap-3 py-2 px-2 rounded transition-colors ${
-                isActive ? "bg-gray-800 text-white" : "hover:bg-gray-700"
+              `flex items-center gap-3 py-2 px-2 rounded transition-colors ${isActive ? "bg-gray-800 text-white" : "hover:bg-gray-700"
               }`
             }
           >
@@ -49,8 +50,7 @@ const SideNav = () => {
           <NavLink
             to="Kids"
             className={({ isActive }) =>
-              `flex items-center gap-3 py-2 px-2 rounded transition-colors ${
-                isActive ? "bg-gray-800 text-white" : "hover:bg-gray-700"
+              `flex items-center gap-3 py-2 px-2 rounded transition-colors ${isActive ? "bg-gray-800 text-white" : "hover:bg-gray-700"
               }`
             }
           >
@@ -59,61 +59,57 @@ const SideNav = () => {
           <NavLink
             to="Accessories"
             className={({ isActive }) =>
-              `flex items-center gap-3 py-2 px-2 rounded transition-colors ${
-                isActive ? "bg-gray-800 text-white" : "hover:bg-gray-700"
+              `flex items-center gap-3 py-2 px-2 rounded transition-colors ${isActive ? "bg-gray-800 text-white" : "hover:bg-gray-700"
               }`
             }
           >
             <FaBoxOpen /> <span>Accessories</span>
           </NavLink>
           <hr className="border-gray-700 my-3 mx-[-16px]" />
-        </div>        
+        </div>
 
         {/* Manage Section */}
         <div className="px-4">
 
-        {user?.role === "Seller" && (         
-          <>
-            <div className="flex items-center gap-3 py-2 cursor-pointer px-2 hover:bg-gray-700 rounded">
-            <RxDashboard /> <span>Dashboard</span>
-          </div>
-          <NavLink
-            to="/products"
-            className={({ isActive }) =>
-              `flex items-center gap-3 py-2 px-2 rounded transition-colors ${
-                isActive ? "bg-gray-800 text-white" : "hover:bg-gray-700"
-              }`
-            }
-          >
-            <TbBrandProducthunt /> <span>Products</span>
-          </NavLink>
-          <NavLink
-            to="/Reviews"
-            className={({ isActive }) =>
-              `flex items-center gap-3 py-2 px-2 rounded transition-colors ${
-                isActive ? "bg-gray-800 text-white" : "hover:bg-gray-700"
-              }`
-            }
-          >
-            <MdOutlineReviews /> <span>Reviews</span>
-          </NavLink>
-          <hr className="border-gray-700 my-3 mx-[-16px]" />
-          </>
-        )}
-
-        {user?.role === "Admin" && (
+          {user?.role === "Seller" && (
             <>
-            <NavLink
-            to="/Users"
-            className={({ isActive }) =>
-              `flex items-center gap-3 py-2 px-2 rounded transition-colors ${
-                isActive ? "bg-gray-800 text-white" : "hover:bg-gray-700"
-              }`
-            }
-          >
-            <FaRegUser /> <span>Users</span>
-          </NavLink>
-          <hr className="border-gray-700 my-3 mx-[-16px]" />
+              <div className="flex items-center gap-3 py-2 cursor-pointer px-2 hover:bg-gray-700 rounded">
+                <RxDashboard /> <span>Dashboard</span>
+              </div>
+              <NavLink
+                to="/products"
+                className={({ isActive }) =>
+                  `flex items-center gap-3 py-2 px-2 rounded transition-colors ${isActive ? "bg-gray-800 text-white" : "hover:bg-gray-700"
+                  }`
+                }
+              >
+                <TbBrandProducthunt /> <span>Products</span>
+              </NavLink>
+              <NavLink
+                to="/Reviews"
+                className={({ isActive }) =>
+                  `flex items-center gap-3 py-2 px-2 rounded transition-colors ${isActive ? "bg-gray-800 text-white" : "hover:bg-gray-700"
+                  }`
+                }
+              >
+                <MdOutlineReviews /> <span>Reviews</span>
+              </NavLink>
+              <hr className="border-gray-700 my-3 mx-[-16px]" />
+            </>
+          )}
+
+          {user?.role === "Admin" && (
+            <>
+              <NavLink
+                to="/Users"
+                className={({ isActive }) =>
+                  `flex items-center gap-3 py-2 px-2 rounded transition-colors ${isActive ? "bg-gray-800 text-white" : "hover:bg-gray-700"
+                  }`
+                }
+              >
+                <FaRegUser /> <span>Users</span>
+              </NavLink>
+              <hr className="border-gray-700 my-3 mx-[-16px]" />
             </>
           )}
         </div>
@@ -123,8 +119,7 @@ const SideNav = () => {
           <NavLink
             to="/Orders"
             className={({ isActive }) =>
-              `flex items-center gap-3 py-2 px-2 rounded transition-colors ${
-                isActive ? "bg-gray-800 text-white" : "hover:bg-gray-700"
+              `flex items-center gap-3 py-2 px-2 rounded transition-colors ${isActive ? "bg-gray-800 text-white" : "hover:bg-gray-700"
               }`
             }
           >
@@ -133,8 +128,7 @@ const SideNav = () => {
           <NavLink
             to="/Cart"
             className={({ isActive }) =>
-              `flex items-center gap-3 py-2 px-2 rounded transition-colors ${
-                isActive ? "bg-gray-800 text-white" : "hover:bg-gray-700"
+              `flex items-center gap-3 py-2 px-2 rounded transition-colors ${isActive ? "bg-gray-800 text-white" : "hover:bg-gray-700"
               }`
             }
           >
@@ -144,8 +138,7 @@ const SideNav = () => {
           <NavLink
             to="/wishlist"
             className={({ isActive }) =>
-              `flex items-center gap-3 py-2 px-2 rounded transition-colors ${
-                isActive ? "bg-gray-800 text-white" : "hover:bg-gray-700"
+              `flex items-center gap-3 py-2 px-2 rounded transition-colors ${isActive ? "bg-gray-800 text-white" : "hover:bg-gray-700"
               }`
             }
           >
@@ -156,8 +149,9 @@ const SideNav = () => {
       </div>
 
       {/* User Section */}
+
       <div className="p-4 border-t border-gray-700">
-        {user?.name ? (
+        {isLoggedIn && user ? (
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 bg-gray-600 rounded-full flex items-center justify-center text-white text-sm">
               {user.avatar ? (
@@ -174,13 +168,15 @@ const SideNav = () => {
           </div>
         ) : (
           <button
-            className="text-white cursor-pointer hover:underline"
-            onClick={() => console.log("Login Clicked")}
+            onClick={handleOpen}
+            className="mt-6 px-6 py-3 w-full bg-blue-600 text-white font-semibold cursor-pointer rounded-xl hover:bg-blue-700 transition duration-300"
           >
             Login
           </button>
         )}
       </div>
+
+
     </div>
   );
 };
