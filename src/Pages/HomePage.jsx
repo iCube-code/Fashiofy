@@ -1,11 +1,16 @@
-import React, { Suspense, useContext } from "react";
+import React, { Suspense} from "react";
 import HoodieCanvas from "../Components/Model_3D/HoodieCanvas";
-import { AuthContext } from "../context/AuthContext";
 import { Link, NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 
 function Home() {
-  const { handleOpen } = useContext(AuthContext);
+
+  const navigate = useNavigate()
+
+  function handleNavigateProducts(){
+    navigate('/products')
+  }
 
   return (
 
@@ -21,7 +26,7 @@ function Home() {
             shopping journey crafted just for you.
           </p>
           <button
-            onClick={handleOpen}
+            onClick={handleNavigateProducts}
             className="mt-6 px-6 py-3 bg-blue-600 text-white font-semibold cursor-pointer rounded-xl hover:bg-blue-700 transition duration-300"
           >
             Shop Now
