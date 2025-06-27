@@ -30,7 +30,7 @@ const SideNav = () => {
         {/* Menu Section */}
         <div className="px-4 pt-4">
           <NavLink
-            to="/Mens"
+            to="/products"
             className={({ isActive }) =>
               `flex items-center gap-3 py-2 px-2 rounded transition-colors ${isActive ? "bg-gray-800 text-white" : "hover:bg-gray-700"
               }`
@@ -39,7 +39,7 @@ const SideNav = () => {
             <GiCharacter /> <span>Mens</span>
           </NavLink>
           <NavLink
-            to="Womens"
+            to="/products"
             className={({ isActive }) =>
               `flex items-center gap-3 py-2 px-2 rounded transition-colors ${isActive ? "bg-gray-800 text-white" : "hover:bg-gray-700"
               }`
@@ -48,7 +48,7 @@ const SideNav = () => {
             <GrRestroomWomen /> <span>Womens</span>
           </NavLink>
           <NavLink
-            to="Kids"
+            to="/products"
             className={({ isActive }) =>
               `flex items-center gap-3 py-2 px-2 rounded transition-colors ${isActive ? "bg-gray-800 text-white" : "hover:bg-gray-700"
               }`
@@ -57,7 +57,7 @@ const SideNav = () => {
             <FaChildReaching /> <span>Kids</span>
           </NavLink>
           <NavLink
-            to="Accessories"
+            to="/products"
             className={({ isActive }) =>
               `flex items-center gap-3 py-2 px-2 rounded transition-colors ${isActive ? "bg-gray-800 text-white" : "hover:bg-gray-700"
               }`
