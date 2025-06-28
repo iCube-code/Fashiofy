@@ -17,10 +17,20 @@ const BACKEND_URI = import.meta.env.VITE_BACKEND_URI
 
 function LoginPopup() {
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const { open, handleClose, onClickOpenRegisterPopup, showOtp, handleOpenOtp, handleCloseOtp } = useContext(AuthContext);
+
+  const {
+    open,
+    handleClose,
+    onClickOpenRegisterPopup,
+    showOtp,
+    handleOpenOtp,
+    handleCloseOtp,
+    email,
+    setEmail,
+    password,
+    setPassword
+  } = useContext(AuthContext);
 
   function handleEyeIcon() {
     setShowPassword(!showPassword)
@@ -57,9 +67,6 @@ function LoginPopup() {
       console.error("Error in Login", err)
       toast.error("Something went wrong")
     }
-
-
-
 
   }
 
