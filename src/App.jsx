@@ -1,5 +1,5 @@
 import "./App.css";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Outlet } from "react-router-dom";
 import HomePage from "./Pages/HomePage";
 import Layout from "./Components/Layout";
 import LoginPopup from "./Components/LoginPopup/LoginPopup";
@@ -10,12 +10,14 @@ import Cart from "./Components/Cart/Cart";
 import { AuthContext, AuthProvider } from "./context/AuthContext";
 import { useContext } from "react";
 import ForgetPassword from "./Components/ForgetPassword"
-import { ToastContainer } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
-
+import { getCookie } from "./utils/cookies";
+import NotFound404 from "./Components/NotFound";
 
 function AppContent() {
-  const { open, openRegisterPopUp, openForgetPassword } = useContext(AuthContext);
+
+  const { open, openRegisterPopUp, openForgetPassword} = useContext(AuthContext);
+  let isLoggedIn = getCookie('token') !== null
+
   return (
     <>
       <Routes>
@@ -24,12 +26,16 @@ function AppContent() {
           <Route path="/products" element={<Products />} />
           <Route path="/Wishlist" element={<Wishlist />} />
           <Route path='/Cart' element={<Cart />} />
+          <Route element={isLoggedIn ? <Outlet /> : <NotFound404 />}>
+          <Route path="/user" element={<h1>Users</h1>} />
+          </Route>
         </Route>
+
+        <Route path="/*" element={<NotFound404 />} />
       </Routes>
       {open && <LoginPopup />}
       {openRegisterPopUp && <RegisterPage />}
       {openForgetPassword && <ForgetPassword />}
-      <ToastContainer position="top-center" theme="dark"/>
     </>
   );
 }

@@ -5,6 +5,7 @@ import { AuthContext } from '../../context/AuthContext';
 import { Dialog } from "@mui/material";
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import { isValidEmail } from '../../utils/validators'
 
 
 function ForgetPassword() {
@@ -12,8 +13,8 @@ function ForgetPassword() {
     const{openForgetPassword, handleCloseForgetPassword} = useContext(AuthContext)
 
     const handleSend = async() => {
-        const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-        if (!isValidEmail) {
+        
+        if (!isValidEmail(email)) {
             toast.error("Please enter a valid email address");
             return;
         }
