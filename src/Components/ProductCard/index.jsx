@@ -1,7 +1,7 @@
-import React from "react";
 import { CiCircleMinus, CiCirclePlus } from "react-icons/ci";
 
 function ProductCard({ products, type, incrementQty, decrementQty, onAddToCart }) {
+
   return (
     <div>
       {products.map((product) => (
