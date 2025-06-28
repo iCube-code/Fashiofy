@@ -9,12 +9,13 @@ import Wishlist from "./Components/Wishlist/Wishlist";
 import Cart from "./Components/Cart/Cart";
 import { AuthContext, AuthProvider } from "./context/AuthContext";
 import { useContext } from "react";
+import ForgetPassword from "./Components/ForgetPassword"
 import { getCookie } from "./utils/cookies";
 import NotFound404 from "./Components/NotFound";
 
 function AppContent() {
 
-  const { open, openRegisterPopUp } = useContext(AuthContext);
+  const { open, openRegisterPopUp, openForgetPassword} = useContext(AuthContext);
   let isLoggedIn = getCookie('token') !== null
 
   return (
@@ -26,7 +27,7 @@ function AppContent() {
           <Route path="/Wishlist" element={<Wishlist />} />
           <Route path='/Cart' element={<Cart />} />
           <Route element={isLoggedIn ? <Outlet /> : <NotFound404 />}>
-            <Route path="/user" element={<h1>Users</h1>} />
+          <Route path="/user" element={<h1>Users</h1>} />
           </Route>
         </Route>
 
@@ -34,6 +35,7 @@ function AppContent() {
       </Routes>
       {open && <LoginPopup />}
       {openRegisterPopUp && <RegisterPage />}
+      {openForgetPassword && <ForgetPassword />}
     </>
   );
 }

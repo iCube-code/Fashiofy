@@ -29,7 +29,8 @@ function LoginPopup() {
     email,
     setEmail,
     password,
-    setPassword
+    setPassword,
+    handleOpenForgetPassword
   } = useContext(AuthContext);
 
   function handleEyeIcon() {
@@ -67,7 +68,6 @@ function LoginPopup() {
       console.error("Error in Login", err)
       toast.error("Something went wrong")
     }
-
   }
 
   return (
@@ -118,16 +118,24 @@ function LoginPopup() {
                 {showPassword ? <FaRegEye /> : <FaRegEyeSlash />}
               </button>
             </div>
+
             <div className="forget-password">
-              <Link>Forgot Password?</Link>
+              <Link
+                onClick={() => {
+                  handleClose()
+                  handleOpenForgetPassword()
+                }}>Forgot Password?</Link>
             </div>
+
             <Button onClick={handleLogin} className='sign-in-button'>Sign in</Button>
           </DialogContent>
+
           <DialogActions className='dialog-acions'>
             <button className='google-icon'>{<FcGoogle size={30} />}</button>
             <button className='github-icon'>{<ImGithub size={30} />}</button>
             <button className='facebook-icon'>{<SiFacebook size={30} />}</button>
           </DialogActions>
+
           <div className="flex justify-center">
             <button
               className="text-white cursor-pointer mt-3"

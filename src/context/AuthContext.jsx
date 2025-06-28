@@ -10,6 +10,8 @@ const AuthProvider = ({ children }) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
+  const [openForgetPassword, setOpenForgetPassword] = useState(false)
+
   function handleResetLogin() {
     setEmail('')
     setPassword('')
@@ -41,6 +43,14 @@ const AuthProvider = ({ children }) => {
     handleResetLogin()
   }
 
+  function handleOpenForgetPassword() {
+    setOpenForgetPassword(true)
+  }
+
+  function handleCloseForgetPassword() {
+    setOpenForgetPassword(false)
+  }
+
   return (
     <AuthContext.Provider
       value={{
@@ -56,7 +66,10 @@ const AuthProvider = ({ children }) => {
         email,
         setEmail,
         password,
-        setPassword
+        setPassword,
+        openForgetPassword,
+        handleOpenForgetPassword,
+        handleCloseForgetPassword
       }}
     >
       {children}
