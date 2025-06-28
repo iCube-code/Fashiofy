@@ -1,6 +1,5 @@
-import React, { useState } from "react";
 import logo from "../../assets/logo-1.jpeg";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { RxDashboard } from "react-icons/rx";
 import { TbBrandProducthunt } from "react-icons/tb";
 import { MdOutlineReviews } from "react-icons/md";
@@ -11,10 +10,14 @@ import { GrRestroomWomen } from "react-icons/gr";
 import { FaChildReaching, FaBoxOpen } from "react-icons/fa6";
 import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
+import { getCookie } from "../../utils/cookies";
+import { jwtDecode } from 'jwt-decode'
 
 const SideNav = () => {
-  const [user, setUser] = useState({ name: "Devika", role: "User" }); {/* role: "Admin" / "Seller" */ }
-  const { isLoggedIn, handleOpen } = useContext(AuthContext);
+
+  const { handleOpen } = useContext(AuthContext);
+
+  const user = getCookie('token') !== null ? jwtDecode(getCookie('token')) : null
 
   return (
     <div className="w-56 h-screen bg-black text-white flex flex-col justify-between mb-1">
@@ -151,7 +154,7 @@ const SideNav = () => {
       {/* User Section */}
 
       <div className="p-4 border-t border-gray-700">
-        {isLoggedIn && user ? (
+        {user !== null ? (
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 bg-gray-600 rounded-full flex items-center justify-center text-white text-sm">
               {user.avatar ? (
@@ -161,10 +164,10 @@ const SideNav = () => {
                   className="w-10 h-10 rounded-full object-cover"
                 />
               ) : (
-                <span>{user?.name.charAt(0)}</span>
+                <span>{user?.userName.charAt(0)}</span>
               )}
             </div>
-            <span className="text-sm font-medium truncate">{user.name}</span>
+            <span className="text-sm font-medium truncate">{user.userName}</span>
           </div>
         ) : (
           <button
