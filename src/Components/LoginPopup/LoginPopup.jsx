@@ -15,7 +15,7 @@ function LoginPopup() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [showPassword, setShowPassword] = useState(false);    
-    const { open, handleClose, onClickOpenRegisterPopup, showOtp, handleOpenOtp, handleCloseOtp } = useContext(AuthContext); 
+    const { open, handleClose, onClickOpenRegisterPopup, showOtp, handleOpenOtp, handleCloseOtp, handleOpenForgetPassword } = useContext(AuthContext); 
     
     function handleEyeIcon(){
       setShowPassword(!showPassword)
@@ -75,7 +75,11 @@ function LoginPopup() {
         </div>
 
         <div className="forget-password">
-          <Link>Forgot Password?</Link>
+          <Link 
+          onClick={()=>{
+            handleClose()
+            handleOpenForgetPassword()
+          }}>Forgot Password?</Link>
         </div>
 
         <Button onClick={handleOpenOtp}  className='sign-in-button'>Sign in</Button>

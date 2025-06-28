@@ -9,9 +9,13 @@ import Wishlist from "./Components/Wishlist/Wishlist";
 import Cart from "./Components/Cart/Cart";
 import { AuthContext, AuthProvider } from "./context/AuthContext";
 import { useContext } from "react";
+import ForgetPassword from "./Components/ForgetPassword"
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+
 
 function AppContent() {
-  const { open, openRegisterPopUp } = useContext(AuthContext);
+  const { open, openRegisterPopUp, openForgetPassword } = useContext(AuthContext);
   return (
     <>
       <Routes>
@@ -24,6 +28,8 @@ function AppContent() {
       </Routes>
       {open && <LoginPopup />}
       {openRegisterPopUp && <RegisterPage />}
+      {openForgetPassword && <ForgetPassword />}
+      <ToastContainer position="top-center" theme="dark"/>
     </>
   );
 }

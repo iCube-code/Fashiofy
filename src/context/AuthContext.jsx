@@ -5,7 +5,8 @@ const AuthContext = createContext();
 const AuthProvider = ({ children }) => {
   const [open, setOpen] = useState(false);
   const [openRegisterPopUp, setOpenRegisterPopUp] = useState(false);
-  const [showOtp, setShowOtp] = useState(false) 
+  const [showOtp, setShowOtp] = useState(false)
+  const [openForgetPassword, setOpenForgetPassword] = useState(false)
 
   function handleOpen() {
     setOpen(true);
@@ -31,6 +32,14 @@ const AuthProvider = ({ children }) => {
     setShowOtp(false)
   }
 
+  function handleOpenForgetPassword(){
+    setOpenForgetPassword(true)
+  }
+
+    function handleCloseForgetPassword(){
+    setOpenForgetPassword(false)
+  }
+
   return (
     <AuthContext.Provider
       value={{
@@ -43,6 +52,9 @@ const AuthProvider = ({ children }) => {
         showOtp,
         handleOpenOtp,
         handleCloseOtp,
+        openForgetPassword,
+        handleOpenForgetPassword,
+        handleCloseForgetPassword
       }}
     >
       {children}
