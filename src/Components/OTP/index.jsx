@@ -1,9 +1,10 @@
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect, useContext } from 'react'
 import './Otp.css'
 import { toast } from 'react-toastify'
 import axios from 'axios'
 import { setCookie } from '../../utils/cookies'
-
+import useTimer from '../../hooks/useTimer'
+import { AuthContext } from '../../context/AuthContext'
 
 const BACKEND_URI = import.meta.env.VITE_BACKEND_URI
 
@@ -11,6 +12,16 @@ function Otp() {
 
     const [otp, setOtp] = useState(['', '', '', '', '', ''])
     const otpRef = useRef([])
+    const [isResend, setIsResend] = useState(false)
+
+    const { email, password } = useContext(AuthContext)
+
+    const { minutes, seconds, startTimer } = useTimer(0, 30)
+
+    useEffect(() => {
+        startTimer()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
     function handleChange(index, value) {
         if (isNaN(value)) return
@@ -61,6 +72,27 @@ function Otp() {
 
     }
 
+    const handleResendOTP = async () => {
+
+        try {
+
+            let response = await axios.post(`${BACKEND_URI}/user/account/login`, {
+                email,
+                password
+            })
+
+            if (response.data.status) {
+                setIsResend(true)
+                toast.success("OTP has resent the your mail address")
+            }
+        }
+        catch (err) {
+            toast.error("Something went wrong")
+            console.error('error in resend otp', err)
+        }
+
+    }
+
     return (
         <div>
             <div className='otp-page'>
@@ -74,7 +106,7 @@ function Otp() {
                             otp.map((value, index) => (
 
                                 <input className='otp-input'
-                                    key={index}
+                                    key={index + "adada"}
                                     type='text'
                                     maxLength={1}
                                     value={value}
@@ -86,7 +118,16 @@ function Otp() {
                         }
                     </div>
                     <div className='otp-box-footer'>
-                        <span>Resend OTP in 00:30</span>
+                        {
+                            !isResend && (
+                                <span>Resend OTP in {
+                                    (parseInt(minutes) === 0 && parseInt(seconds) === 0) ?
+                                        <span className='text-[#11bddb] underline cursor-pointer' onClick={handleResendOTP}>Resend</span>
+                                        :
+                                        <>{minutes}:{seconds}</>
+                                } </span>
+                            )
+                        }
                         <p>Make sure you enter a valid OTP that was sent to your email</p>
                     </div>
                     <div className='otp-box-actions'>

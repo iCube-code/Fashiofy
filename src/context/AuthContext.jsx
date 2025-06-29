@@ -6,7 +6,16 @@ const AuthProvider = ({ children }) => {
   const [open, setOpen] = useState(false);
   const [openRegisterPopUp, setOpenRegisterPopUp] = useState(false);
   const [showOtp, setShowOtp] = useState(false)
+
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+
   const [openForgetPassword, setOpenForgetPassword] = useState(false)
+
+  function handleResetLogin() {
+    setEmail('')
+    setPassword('')
+  }
 
   function handleOpen() {
     setOpen(true);
@@ -14,6 +23,7 @@ const AuthProvider = ({ children }) => {
 
   function handleClose() {
     setOpen(false);
+    handleResetLogin()
   }
 
   function onClickOpenRegisterPopup() {
@@ -24,19 +34,20 @@ const AuthProvider = ({ children }) => {
     setOpenRegisterPopUp(false);
   }
 
-  function handleOpenOtp(){        
+  function handleOpenOtp() {
     setShowOtp(true)
   }
-  
-  function handleCloseOtp(){
+
+  function handleCloseOtp() {
     setShowOtp(false)
+    handleResetLogin()
   }
 
-  function handleOpenForgetPassword(){
+  function handleOpenForgetPassword() {
     setOpenForgetPassword(true)
   }
 
-    function handleCloseForgetPassword(){
+  function handleCloseForgetPassword() {
     setOpenForgetPassword(false)
   }
 
@@ -52,6 +63,10 @@ const AuthProvider = ({ children }) => {
         showOtp,
         handleOpenOtp,
         handleCloseOtp,
+        email,
+        setEmail,
+        password,
+        setPassword,
         openForgetPassword,
         handleOpenForgetPassword,
         handleCloseForgetPassword

@@ -17,16 +17,27 @@ const BACKEND_URI = import.meta.env.VITE_BACKEND_URI
 
 function LoginPopup() {
 
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [showPassword, setShowPassword] = useState(false);    
-    const { open, handleClose, onClickOpenRegisterPopup, showOtp, handleOpenOtp, handleCloseOtp, handleOpenForgetPassword } = useContext(AuthContext); 
-    
-    function handleEyeIcon(){
-      setShowPassword(!showPassword)
-    }
+  const [showPassword, setShowPassword] = useState(false);
 
-    const handleLogin = async () => {
+  const {
+    open,
+    handleClose,
+    onClickOpenRegisterPopup,
+    showOtp,
+    handleOpenOtp,
+    handleCloseOtp,
+    email,
+    setEmail,
+    password,
+    setPassword,
+    handleOpenForgetPassword
+  } = useContext(AuthContext);
+
+  function handleEyeIcon() {
+    setShowPassword(!showPassword)
+  }
+
+  const handleLogin = async () => {
 
     if (!isValidEmail(email)) {
       toast.error("Please check the email")
@@ -106,39 +117,39 @@ function LoginPopup() {
               <button className='eye-icon' onClick={handleEyeIcon}>
                 {showPassword ? <FaRegEye /> : <FaRegEyeSlash />}
               </button>
-            </div>            
+            </div>
 
             <div className="forget-password">
-              <Link 
-              onClick={()=>{
-                handleClose()
-                handleOpenForgetPassword()
-              }}>Forgot Password?</Link>
+              <Link
+                onClick={() => {
+                  handleClose()
+                  handleOpenForgetPassword()
+                }}>Forgot Password?</Link>
             </div>
 
             <Button onClick={handleLogin} className='sign-in-button'>Sign in</Button>
           </DialogContent>
-                
-          <DialogActions className='dialog-acions'>                               
-              <button className='google-icon'>{<FcGoogle size={30} />}</button>
-              <button className='github-icon'>{<ImGithub size={30}/>}</button>
-              <button className='facebook-icon'>{<SiFacebook size={30} />}</button> 
+
+          <DialogActions className='dialog-acions'>
+            <button className='google-icon'>{<FcGoogle size={30} />}</button>
+            <button className='github-icon'>{<ImGithub size={30} />}</button>
+            <button className='facebook-icon'>{<SiFacebook size={30} />}</button>
           </DialogActions>
 
           <div className="flex justify-center">
-              <button
+            <button
               className="text-white cursor-pointer mt-3"
               onClick={() => {
-              handleClose();
-              onClickOpenRegisterPopup();
+                handleClose();
+                onClickOpenRegisterPopup();
               }}
-              >
+            >
               Create Account
-              </button>
+            </button>
           </div>
         </div>
-    )
-    }
+      )
+      }
     </Dialog>
   )
 }
