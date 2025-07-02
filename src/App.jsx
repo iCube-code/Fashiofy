@@ -12,6 +12,7 @@ import { useContext } from "react";
 import ForgetPassword from "./Components/ForgetPassword"
 import { getCookie } from "./utils/cookies";
 import NotFound404 from "./Components/NotFound";
+import VerifyEmail from "./Pages/verifyEmail"; 
 
 function AppContent() {
 
@@ -31,6 +32,7 @@ function AppContent() {
           </Route>
         </Route>
 
+        <Route path="/account/verify/:secret" element={<VerifyEmail />} />
         <Route path="/*" element={<NotFound404 />} />
       </Routes>
       {open && <LoginPopup />}
