@@ -44,8 +44,33 @@ function Products() {
         toast.success("Product added to cart successfully");
       }
     } catch (e) {
-      console.log('ERROR ADD TO CART: ',e);
-      toast.error("Failed to add to cart");
+      toast.error(e.response.data.message ?? "Failed to add to cart");
+    }
+  };
+
+  const handleAddToWishlist = async (productId) => {
+    try {
+      const token = getCookie("token");
+      const decoded = jwtDecode(token);
+      const userId = decoded.id;
+      const response = await axios.post(
+        `${import.meta.env.VITE_BACKEND_URI}/products/wishlist/add`,
+        {
+          productId,
+          userId,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (response.status === 200) {
+        toast.success("Product added to wishlist successfully");
+      }
+    } catch (e) {
+      toast.error(e.response.data.message ?? "Failed to add to wishlist");
     }
   };
 
@@ -75,7 +100,9 @@ function Products() {
                   if (!isLoggedIn) {
                     handleOpen(); // Show login popup
                   }
-                  if (isLoggedIn) {
+                  if (isLoggedIn && !product.wishList) {
+                    // Add to wishlist
+                    handleAddToWishlist(product.id);
                     toggleWishlist(product.id);
                   }
                 }}
@@ -125,7 +152,6 @@ function Products() {
                   // Add to cart logic here
                   handleAddToCart(product.id);
                 }
-               
               }}
             >
               Add to Cart
