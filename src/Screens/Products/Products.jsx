@@ -118,15 +118,14 @@ function Products() {
             <button
               className="mt-4 bg-black text-white py-2 rounded-lg cursor-pointer hover:bg-gray-800 transition text-sm"
               onClick={() => {
-                // if (!isLoggedIn) {
-                //   handleOpen(); // Show login popup
-                // }
-                // if (isLoggedIn) {
-                //   // Add to cart logic here
-
-                //   console.log(`Added ${product.name} to cart`);
-                // }
-                handleAddToCart(product.id);
+                if (!isLoggedIn) {
+                  handleOpen(); // Show login popup
+                }
+                if (isLoggedIn) {
+                  // Add to cart logic here
+                  handleAddToCart(product.id);
+                }
+               
               }}
             >
               Add to Cart
