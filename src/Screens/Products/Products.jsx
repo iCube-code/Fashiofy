@@ -1,39 +1,59 @@
 import { useState, useContext } from "react";
 import { fashiofyData } from "../../data/index";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
-
+import axios from "axios";
 import Filter from "./Filter";
 
 import { AuthContext } from "../../context/AuthContext";
 import { getCookie } from "../../utils/cookies";
-
-
+import { jwtDecode } from "jwt-decode";
+import { toast } from "react-toastify";
 function Products() {
   const [products, setProducts] = useState(fashiofyData);
   const { handleOpen } = useContext(AuthContext);
 
-  let isLoggedIn = getCookie('token') !== null
+  let isLoggedIn = getCookie("token") !== null;
 
   const toggleWishlist = (id) => {
-
     const updatedProducts = products.map((product) =>
-      product.id === id
-        ? { ...product, wishList: true }
-        : product
+      product.id === id ? { ...product, wishList: true } : product
     );
 
     setProducts(updatedProducts);
   };
 
+  const handleAddToCart = async (productId) => {
+    try {
+      const token = getCookie("token");
+      const decoded = jwtDecode(token);
+      const userId = decoded.id;
+      const response = await axios.post(
+        `${import.meta.env.VITE_BACKEND_URI}/products/cart/add`,
+        {
+          productId,
+          userId,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
+      if (response.status === 200) {
+        toast.success("Product added to cart successfully");
+      }
+    } catch (e) {
+      console.log('ERROR ADD TO CART: ',e);
+      toast.error("Failed to add to cart");
+    }
+  };
 
   return (
     <div className=" mx-auto p-4">
       <div className="flex items-center justify-between text-center">
         <h1 className="text-3xl font-bold mb-6">Products</h1>
-        <span className="text-2xl font-medium mb-6"
-
-        >
+        <span className="text-2xl font-medium mb-6">
           <Filter />
         </span>
       </div>
@@ -59,7 +79,6 @@ function Products() {
                     toggleWishlist(product.id);
                   }
                 }}
-
                 className="absolute top-2 right-2 text-xl text-red-500 z-10 cursor-pointer"
               >
                 {product.wishList ? <FaHeart /> : <FaRegHeart />}
@@ -104,8 +123,9 @@ function Products() {
                 }
                 if (isLoggedIn) {
                   // Add to cart logic here
-                  console.log(`Added ${product.name} to cart`);
+                  handleAddToCart(product.id);
                 }
+               
               }}
             >
               Add to Cart

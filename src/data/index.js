@@ -1,12 +1,12 @@
-export let fashiofyData=[
+export let fashiofyData = [
   {
-    "id": 100,
+    "id": "68664e6def7fba2a129a83cb",
     "brand": "H&M",
     "name": "Loose Fit Printed T-Shirt",
-    "rating": " ★★★★⯪ 4.3",
+    "rating": "★★★★⯪ 4.3",
     "reviews": 221,
     "wishList": true,
-     "inCart": false ,
+    "inCart": false,
     "qty": 1,
     "price": "2299",
     "MRP": "3490",
@@ -15,13 +15,13 @@ export let fashiofyData=[
     "imgURIs": ["https://rukminim2.flixcart.com/image/832/832/xif0q/t-shirt/z/o/q/m-mbolve0plinosize12-mebadass-original-imagghzyb5vq8dzy.jpeg?q=70&crop=false"]
   },
   {
-    "id": 101,
+    "id": "66a2f5264fdc72c2a2b946ff",
     "brand": "Zara",
     "name": "Slim Fit Cotton T-Shirt",
-    "rating": " ★★★★☆ 4.1",
+    "rating": "★★★★☆ 4.1",
     "reviews": 150,
     "wishList": false,
-    "inCart": false ,
+    "inCart": false,
     "qty": 1,
     "price": "1899",
     "MRP": "2599",
@@ -30,13 +30,13 @@ export let fashiofyData=[
     "imgURIs": ["https://rukminim2.flixcart.com/image/832/832/xif0q/t-shirt/z/4/w/l-31677849-here-now-original-imahbk8judgjq6hp.jpeg?q=70&crop=false"]
   },
   {
-    "id": 104,
+    "id": "66a2f52933f2295461d13fd3",
     "brand": "HRX",
     "name": "Men Self Design T-shirt",
-    "rating": " ★★★★☆ 4.0",
+    "rating": "★★★★☆ 4.0",
     "reviews": 189,
     "wishList": false,
-    "inCart": false ,
+    "inCart": false,
     "qty": 1,
     "price": "999",
     "MRP": "1499",
@@ -45,13 +45,13 @@ export let fashiofyData=[
     "imgURIs": ["https://rukminim2.flixcart.com/image/832/832/xif0q/t-shirt/o/s/g/xxl-urm027711p-urgear-original-imahcd5asgephegy.jpeg?q=70&crop=false"]
   },
   {
-    "id": 109,
+    "id": "66a2f52c367a153a582e8f4e",
     "brand": "Roadster",
     "name": "Regular Fit Round-Neck T-shirt",
     "rating": "★★★⯪☆ 3.5",
     "reviews": 312,
     "wishList": false,
-    "inCart": false ,
+    "inCart": false,
     "qty": 1,
     "price": "1499",
     "MRP": "1990",
@@ -60,13 +60,13 @@ export let fashiofyData=[
     "imgURIs": ["https://rukminim2.flixcart.com/image/832/832/xif0q/t-shirt/4/3/k/s-men-back-print2-vg-datalact-original-imahbhdmffagtypx.jpeg?q=70&crop=false"]
   },
   {
-    "id": 111,
+    "id": "66a2f5305c2a021d59bcf2be",
     "brand": "Rimeline",
     "name": "Floral Printed Straight Kurta",
     "rating": "★★★★⯪ 4.3",
     "reviews": 201,
     "wishList": false,
-    "inCart": false ,
+    "inCart": false,
     "qty": 1,
     "price": "999",
     "MRP": "1490",
@@ -75,13 +75,13 @@ export let fashiofyData=[
     "imgURIs": ["https://rukminim2.flixcart.com/image/832/832/xif0q/kurta/m/y/s/xl-46vs1058kr-vasant-apparel-original-imah4zvpchyzfyev.jpeg?q=70&crop=false"]
   },
   {
-    "id": 116,
+    "id": "66a2f533d963ebbc7992343a",
     "brand": "GoSriKi",
     "name": "Printed Kurta with Palazzo",
-    "rating": " ★★★★⯪ 4.2",
+    "rating": "★★★★⯪ 4.2",
     "reviews": 214,
     "wishList": true,
-    "inCart": false ,
+    "inCart": false,
     "qty": 1,
     "price": "1899",
     "MRP": "2690",
@@ -90,13 +90,13 @@ export let fashiofyData=[
     "imgURIs": ["https://rukminim2.flixcart.com/image/832/832/xif0q/kurta/o/g/h/xl-dp313-saloni-creation-original-imah38hcdghdqvcg.jpeg?q=70&crop=false"]
   },
   {
-    "id": 118,
+    "id": "66a2f536944a937a5c65546d",
     "brand": "Biba",
     "name": "Printed Anarkali Kurta",
-    "rating": " ★★★★⯪ 4.3",
+    "rating": "★★★★⯪ 4.3",
     "reviews": 198,
     "wishList": false,
-    "inCart": false ,
+    "inCart": false,
     "qty": 1,
     "price": "4299",
     "MRP": "5999",
@@ -104,12 +104,11 @@ export let fashiofyData=[
     "category": "mens",
     "imgURIs": ["https://rukminim2.flixcart.com/image/832/832/l5h2xe80/kurta/q/c/i/m-ac-ku-20-collar-amar-creation-original-imagg4w8hxzuh9na.jpeg?q=70&crop=false"]
   },
-
   {
-    "id": 103,
+    "id": "66a2f53932dcf0022e8e9be3",
     "brand": "Sangria",
     "name": "Solid A-Line Dress",
-    "rating": " ★★★★⯪ 4.5",
+    "rating": "★★★★⯪ 4.5",
     "reviews": 312,
     "wishList": false,
     "inCart": false,
@@ -121,13 +120,13 @@ export let fashiofyData=[
     "imgURIs": ["https://rukminim2.flixcart.com/image/832/832/xif0q/kurta/k/i/j/xxl-1212-rare-thread-original-imahd2ke2uywykhd.jpeg?q=70&crop=false"]
   },
   {
-    "id": 105,
+    "id": "66a2f53c58945b3f14deee08",
     "brand": "Jack & Jones",
     "name": "Men Round Toe Sneakers",
-    "rating": " ★★★★⯪ 4.4",
+    "rating": "★★★★⯪ 4.4",
     "reviews": 271,
     "wishList": false,
-    "inCart": false ,
+    "inCart": false,
     "qty": 1,
     "price": "1799",
     "MRP": "2690",
@@ -136,13 +135,13 @@ export let fashiofyData=[
     "imgURIs": ["https://rukminim2.flixcart.com/image/832/832/xif0q/shoe/f/f/u/8-indus-black-8-clymb-black-original-imah2gasp7hzzusz.jpeg?q=70&crop=false"]
   },
   {
-    "id": 110,
+    "id": "66a2f53f9446d5f8f7f803ff",
     "brand": "Campus",
     "name": "Men Colourblocked PU Sneaakers",
-    "rating": " ★★★★⯪ 4.5",
+    "rating": "★★★★⯪ 4.5",
     "reviews": 234,
     "wishList": true,
-    "inCart": false ,
+    "inCart": false,
     "qty": 1,
     "price": "1999",
     "MRP": "2999",
@@ -151,13 +150,13 @@ export let fashiofyData=[
     "imgURIs": ["https://rukminim2.flixcart.com/image/832/832/xif0q/shoe/j/p/e/-original-imah46qhgfshpr3f.jpeg?q=70&crop=false"]
   },
   {
-    "id": 114,
+    "id": "66a2f54291e255ea60d5ac9c",
     "brand": "Metro",
     "name": "Straight Fit Heels",
-    "rating": " ★★★★☆ 4.0",
+    "rating": "★★★★☆ 4.0",
     "reviews": 142,
     "wishList": false,
-    "inCart": false ,
+    "inCart": false,
     "qty": 1,
     "price": "1599",
     "MRP": "2299",
@@ -165,12 +164,11 @@ export let fashiofyData=[
     "category": "womens",
     "imgURIs": ["https://rukminim2.flixcart.com/image/832/832/xif0q/shoe/i/d/w/8-8545-8-killer-sea-green-original-imah7spdwsy3zete.jpeg?q=70&crop=false"]
   },
-
   {
-    "id": 102,
+    "id": "66a2f545f2c71d6d15351bb6",
     "brand": "Nike",
     "name": "Revolution 6 Running Shoes",
-    "rating": " ★★★★⯪ 4.7",
+    "rating": "★★★★⯪ 4.7",
     "reviews": 521,
     "wishList": true,
     "inCart": false,
@@ -180,5 +178,5 @@ export let fashiofyData=[
     "discount": 22,
     "category": "shoes",
     "imgURIs": ["https://rukminim2.flixcart.com/image/832/832/xif0q/shoe/p/p/a/-original-imahfxuxfujjvydt.jpeg?q=70&crop=false"]
-  },
-]
+  }
+];
