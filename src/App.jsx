@@ -12,10 +12,11 @@ import { useContext } from "react";
 import ForgetPassword from "./Components/ForgetPassword"
 import { getCookie } from "./utils/cookies";
 import NotFound404 from "./Components/NotFound";
+import Otp from "./Components/OTP";
 
 function AppContent() {
 
-  const { open, openRegisterPopUp, openForgetPassword} = useContext(AuthContext);
+  const { open, openRegisterPopUp, openForgetPassword, showOtp} = useContext(AuthContext);
   let isLoggedIn = getCookie('token') !== null
 
   return (
@@ -36,6 +37,7 @@ function AppContent() {
       {open && <LoginPopup />}
       {openRegisterPopUp && <RegisterPage />}
       {openForgetPassword && <ForgetPassword />}
+      {showOtp && <Otp />}
     </>
   );
 }

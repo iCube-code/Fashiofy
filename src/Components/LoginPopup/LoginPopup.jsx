@@ -8,7 +8,6 @@ import { SiFacebook } from "react-icons/si";
 import { AiOutlineClose } from "react-icons/ai";
 import { FaRegEyeSlash, FaRegEye } from "react-icons/fa6";
 import { AuthContext } from "../../context/AuthContext";
-import Otp from '../OTP';
 import { isValidEmail, isValidPassword } from '../../utils/validators'
 import { toast } from 'react-toastify'
 import axios from 'axios'
@@ -23,7 +22,6 @@ function LoginPopup() {
     open,
     handleClose,
     onClickOpenRegisterPopup,
-    showOtp,
     handleOpenOtp,
     handleCloseOtp,
     email,
@@ -76,9 +74,7 @@ function LoginPopup() {
         handleClose();
         handleCloseOtp();
       }}>
-      {showOtp ? (
-        <Otp />
-      ) : (
+
         <div className='dialog-box'>
           <Button onClick={handleClose} className='dialog-close'>{<AiOutlineClose size={25} />}</Button>
           <DialogTitle className='dialog-title'>
@@ -148,8 +144,6 @@ function LoginPopup() {
             </button>
           </div>
         </div>
-      )
-      }
     </Dialog>
   )
 }
