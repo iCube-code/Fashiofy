@@ -5,6 +5,7 @@ import axios from 'axios'
 import { setCookie } from '../../utils/cookies'
 import useTimer from '../../hooks/useTimer'
 import { AuthContext } from '../../context/AuthContext'
+import {  Dialog } from '@mui/material'
 
 const BACKEND_URI = import.meta.env.VITE_BACKEND_URI
 
@@ -14,7 +15,7 @@ function Otp() {
     const otpRef = useRef([])
     const [isResend, setIsResend] = useState(false)
 
-    const { email, password } = useContext(AuthContext)
+    const { email, password, handleOpenOtp, handleCloseOtp } = useContext(AuthContext)
 
     const { minutes, seconds, startTimer } = useTimer(0, 30)
 
@@ -94,7 +95,7 @@ function Otp() {
     }
 
     return (
-        <div>
+        <Dialog open={handleOpenOtp} onClose={handleCloseOtp}>
             <div className='otp-page'>
                 <div className='otp-box'>
                     <div className='otp-box-title'>
@@ -118,16 +119,16 @@ function Otp() {
                         }
                     </div>
                     <div className='otp-box-footer'>
-                        {
+                          {
                             !isResend && (
-                                <span>Resend OTP in {
-                                    (parseInt(minutes) === 0 && parseInt(seconds) === 0) ?
-                                        <span className='text-[#11bddb] underline cursor-pointer' onClick={handleResendOTP}>Resend</span>
-                                        :
-                                        <>{minutes}:{seconds}</>
-                                } </span>
-                            )
-                        }
+                                (parseInt(minutes) === 0 && parseInt(seconds) === 0) ? (
+                                    <span className='text-[#11bddb] underline cursor-pointer' onClick={handleResendOTP}>Resend</span>
+                                ) : (
+                                    <span>
+                                    Resend Otp in {minutes}:{seconds}
+                                    </span>
+                                )
+                          )}
                         <p>Make sure you enter a valid OTP that was sent to your email</p>
                     </div>
                     <div className='otp-box-actions'>
@@ -135,7 +136,7 @@ function Otp() {
                     </div>
                 </div>
             </div>
-        </div>
+        </Dialog>
     )
 }
 
