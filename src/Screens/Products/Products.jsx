@@ -1,5 +1,4 @@
-import { useState, useContext } from "react";
-import { fashiofyData } from "../../data/index";
+import { useState, useContext, useEffect } from "react";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 import axios from "axios";
 import Filter from "./Filter";
@@ -9,7 +8,9 @@ import { getCookie } from "../../utils/cookies";
 import { jwtDecode } from "jwt-decode";
 import { toast } from "react-toastify";
 function Products() {
-  const [products, setProducts] = useState(fashiofyData);
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(false);
+
   const { handleOpen } = useContext(AuthContext);
 
   let isLoggedIn = getCookie("token") !== null;
@@ -74,6 +75,27 @@ function Products() {
     }
   };
 
+  const fetchProducts = async () => {
+    setLoading(true);
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_BACKEND_URI}/products/all`
+      );
+
+      if (response.status === 200) {
+        setProducts(response.data.data);
+      }
+    } catch (e) {
+      toast.error(e.response?.data?.message ?? "Failed to fetch products");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchProducts();
+  }, []);
+
   return (
     <div className=" mx-auto p-4">
       <div className="flex items-center justify-between text-center">
@@ -82,83 +104,110 @@ function Products() {
           <Filter />
         </span>
       </div>
-
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {products.map((product) => (
+      {loading ? (
+        <div className="text-center text-xl font-semibold py-10">
           <div
-            key={product.id}
-            className="bg-white rounded-2xl shadow hover:shadow-lg transition p-4 flex flex-col"
+            className="inline-block h-12 w-12 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
+            role="status"
           >
-            <div className="relative aspect-[3/4] overflow-hidden rounded-xl bg-gray-100">
-              <img
-                src={product.imgURIs}
-                alt={product.name}
-                className="w-full h-full object-contain transition-transform duration-300 hover:scale-105"
-              />
+            <span className="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]">
+              Loading...
+            </span>
+          </div>
+        </div>
+      ) : products.length === 0 ? (
+        <div className="text-center text-xl font-semibold py-10">
+          No Products
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 ">
+          {products.map((product) => (
+            <div
+              key={product._id}
+              className="bg-white rounded-2xl shadow hover:shadow-lg transition p-4 flex flex-col"
+            >
+              <div className="relative aspect-[3/4] overflow-hidden rounded-xl bg-gray-100">
+                <img
+                  src={product.images[0]}
+                  alt={product.name}
+                  className="w-full h-full object-contain transition-transform duration-300 hover:scale-105"
+                />
+                <button
+                  onClick={() => {
+                    if (!isLoggedIn) {
+                      handleOpen(); // Show login popup
+                    }
+                    if (isLoggedIn && !product.wishList) {
+                      // Add to wishlist
+                      handleAddToWishlist(product.id);
+                      toggleWishlist(product.id);
+                    }
+                  }}
+                  className="absolute top-2 right-2 text-xl text-red-500 z-10 cursor-pointer"
+                >
+                  {product.wishList ? <FaHeart /> : <FaRegHeart />}
+                </button>
+              </div>
+
+              <div className="mt-4 space-y-1 flex-1 flex flex-col justify-between">
+                <div>
+                  <h2 className="text-sm text-gray-500 font-semibold">
+                    {product.brand}
+                  </h2>
+                  <h3 className="text-base font-medium text-gray-900">
+                    {product.name}
+                  </h3>
+                  <h3 className="text-base font-semibold text-gray-900">
+                    size: {product.size}
+                  </h3>
+                  <h3 className="text-base font-semibold text-gray-900">
+                   stock: {product.stock}
+                  </h3>
+                </div>
+
+                <div className="flex items-center gap-2 text-sm mt-1 text-yellow-600">
+                  <span>{product.rating}</span>
+                  <span className="text-gray-500">
+                    ({product.reviews} Reviews)
+                  </span>
+                </div>
+
+                <div className="mt-2">
+                  <p className="text-lg font-semibold text-gray-900">
+                    ₹{product.price}
+                  </p>
+                  <p className="text-sm text-gray-500 line-through">
+                    ₹{product.originalPrice}
+                  </p>
+                  <p className="text-sm text-green-600 font-semibold">
+                    {Math.round(
+                      ((product.originalPrice - product.price) /
+                        product.originalPrice) *
+                        100
+                    )}
+                    % OFF
+                  </p>
+                </div>
+              </div>
+
               <button
+                className="mt-4 bg-black text-white py-2 rounded-lg cursor-pointer hover:bg-gray-800 transition text-sm"
                 onClick={() => {
                   if (!isLoggedIn) {
                     handleOpen(); // Show login popup
                   }
-                  if (isLoggedIn && !product.wishList) {
-                    // Add to wishlist
-                    handleAddToWishlist(product.id);
-                    toggleWishlist(product.id);
+                  if (isLoggedIn) {
+                    // Add to cart logic here
+                    handleAddToCart(product.id);
                   }
                 }}
-                className="absolute top-2 right-2 text-xl text-red-500 z-10 cursor-pointer"
               >
-                {product.wishList ? <FaHeart /> : <FaRegHeart />}
+                Add to Cart
               </button>
             </div>
-
-            <div className="mt-4 space-y-1 flex-1 flex flex-col justify-between">
-              <div>
-                <h2 className="text-sm text-gray-500 font-semibold">
-                  {product.brand}
-                </h2>
-                <h3 className="text-base font-medium text-gray-900">
-                  {product.name}
-                </h3>
-              </div>
-
-              <div className="flex items-center gap-2 text-sm mt-1 text-yellow-600">
-                <span>{product.rating}</span>
-                <span className="text-gray-500">
-                  ({product.reviews} Reviews)
-                </span>
-              </div>
-
-              <div className="mt-2">
-                <p className="text-lg font-semibold text-gray-900">
-                  ₹{product.price}
-                </p>
-                <p className="text-sm text-gray-500 line-through">
-                  ₹{product.MRP}
-                </p>
-                <p className="text-sm text-green-600 font-semibold">
-                  {product.discount}% OFF
-                </p>
-              </div>
-            </div>
-
-            <button
-              className="mt-4 bg-black text-white py-2 rounded-lg cursor-pointer hover:bg-gray-800 transition text-sm"
-              onClick={() => {
-                if (!isLoggedIn) {
-                  handleOpen(); // Show login popup
-                }
-                if (isLoggedIn) {
-                  // Add to cart logic here
-                  handleAddToCart(product.id);
-                }
-              }}
-            >
-              Add to Cart
-            </button>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
