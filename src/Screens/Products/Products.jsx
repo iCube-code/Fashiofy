@@ -10,7 +10,6 @@ import { toast } from "react-toastify";
 function Products() {
   const [products, setProducts] = useState([]);
   const [Loading, setLoading] = useState(true);
-  // console.log(products);
 
   const { handleOpen } = useContext(AuthContext);
 
