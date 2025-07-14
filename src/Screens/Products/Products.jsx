@@ -22,6 +22,7 @@ function Products() {
     setProducts(updatedProducts);
   };
 
+  // ADD TO CART
   const handleAddToCart = async (productId) => {
     try {
       const token = getCookie("token");
@@ -48,11 +49,14 @@ function Products() {
     }
   };
 
+  // ADD TO WISHLIST 
   const handleAddToWishlist = async (productId) => {
     try {
+
       const token = getCookie("token");
       const decoded = jwtDecode(token);
       const userId = decoded.id;
+
       const response = await axios.post(
         `${import.meta.env.VITE_BACKEND_URI}/products/wishlist/add`,
         {
