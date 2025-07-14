@@ -200,7 +200,7 @@ function Products() {
                   }
                   if (isLoggedIn) {
                     // Add to cart logic here
-                    handleAddToCart(product.id);
+                    handleAddToCart(product._id);
                   }
                 }}
               >
