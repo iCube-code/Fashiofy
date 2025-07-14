@@ -36,6 +36,7 @@ const AuthProvider = ({ children }) => {
 
   function handleOpenOtp() {
     setShowOtp(true)
+    setOpen(false)
   }
 
   function handleCloseOtp() {
