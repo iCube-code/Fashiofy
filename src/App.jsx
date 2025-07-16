@@ -15,6 +15,7 @@ import NotFound404 from "./Components/NotFound";
 import Otp from "./Components/OTP";
 import VerifyEmail from "./Pages/verifyEmail";
 import Orders from "./Components/Orders/Orders";
+import SetupPassword from "./Screens/SetupPassword";
 
 function AppContent() {
   const { open, openRegisterPopUp, openForgetPassword, showOtp} = useContext(AuthContext);
@@ -36,6 +37,7 @@ function AppContent() {
 
         <Route path="/account/verify/:secret" element={<VerifyEmail />} />
         <Route path="/*" element={<NotFound404 />} />
+        <Route path="/setuppassword" element={<SetupPassword />} />
       </Routes>
       {open && <LoginPopup />}
       {openRegisterPopUp && <RegisterPage />}
