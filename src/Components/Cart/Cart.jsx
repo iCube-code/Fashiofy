@@ -29,7 +29,9 @@ function Cart() {
     (acc, item) => acc + item.fk_product_id.price * item.count,
     0
   );
-  const total = subtotal + 250;
+  
+  const taxAmount = ((subtotal*18)/100).toFixed();
+  const total = subtotal + Number(taxAmount);
 
   useEffect(() => {
     const getCartProducts = async () => {
@@ -88,6 +90,8 @@ function Cart() {
             <div className="grid grid-cols-[3fr_1fr] text-gray-700 font-semibold border-b pb-3 mb-4">
               <div>Subtotal</div>
               <div className="text-right">₹ {subtotal}</div>
+              <div>Tax(18%)</div>
+              <div className="text-right">₹ {taxAmount}</div>
             </div>
             <div className="grid grid-cols-[3fr_1fr] text-gray-700 font-semibold border-b pb-3 mb-4">
               <div>Total <br />
