@@ -17,12 +17,15 @@ function Products() {
 
   const toggleWishlist = (id) => {
     const updatedProducts = products.map((product) =>
-      product.id === id ? { ...product, wishList: true } : product
+      product._id === id
+        ? { ...product, wishListed: !product.wishListed }
+        : product
     );
 
     setProducts(updatedProducts);
   };
 
+  // ADD TO CART
   const handleAddToCart = async (productId) => {
     try {
       const token = getCookie("token");
@@ -49,11 +52,13 @@ function Products() {
     }
   };
 
+  // ADD TO WISHLIST
   const handleAddToWishlist = async (productId) => {
     try {
       const token = getCookie("token");
       const decoded = jwtDecode(token);
       const userId = decoded.id;
+
       const response = await axios.post(
         `${import.meta.env.VITE_BACKEND_URI}/products/wishlist/add`,
         {
@@ -74,23 +79,22 @@ function Products() {
       toast.error(e.response.data.message ?? "Failed to add to wishlist");
     }
   };
+
   useEffect(() => {
     const getProducts = async () => {
       setLoading(true);
       try {
-        const  response  = await axios.get(
+        const response = await axios.get(
           `${import.meta.env.VITE_BACKEND_URI}/products/all`
         );
 
         if (response.status === 200) {
-         
           setProducts(response.data.data);
-          
         } else {
-          toast.error('Unexpected response while loading products');
+          toast.error("Unexpected response while loading products");
         }
       } catch (e) {
-        toast.error(e.response?.data?.message ?? 'Failed to load products');
+        toast.error(e.response?.data?.message ?? "Failed to load products");
       } finally {
         setLoading(false);
       }
@@ -98,9 +102,9 @@ function Products() {
     getProducts();
   }, []);
 
-  function discount(price,originalPrice){
-      const dis = (price/originalPrice)*100;
-      return dis.toFixed(0);
+  function discount(price, originalPrice) {
+    const dis = (price / originalPrice) * 100;
+    return dis.toFixed(0);
   }
 
   return (
@@ -151,15 +155,19 @@ function Products() {
                     if (!isLoggedIn) {
                       handleOpen(); // Show login popup
                     }
-                    if (isLoggedIn && !product.wishList) {
+                    if (isLoggedIn && product.wishList === false) {
                       // Add to wishlist
-                      handleAddToWishlist(product.id);
-                      toggleWishlist(product.id);
+                      handleAddToWishlist(product._id);    
+                      toggleWishlist(product._id);
+                    } else {
+                      
+                      // Remove Product from wishlist
+                      // toggleWishlist(product._id);
                     }
                   }}
                   className="absolute top-2 right-2 text-xl text-red-500 z-10 cursor-pointer"
                 >
-                  {product.wishList ? <FaHeart /> : <FaRegHeart />}
+                  {product.wishListed ? <FaHeart /> : <FaRegHeart />}
                 </button>
               </div>
 
@@ -187,7 +195,7 @@ function Products() {
                     ₹{product.originalPrice}
                   </p>
                   <p className="text-sm text-green-600 font-semibold">
-                   {discount(product.price,product.originalPrice)}% OFF
+                    {discount(product.price, product.originalPrice)}% OFF
                   </p>
                 </div>
               </div>
@@ -200,7 +208,7 @@ function Products() {
                   }
                   if (isLoggedIn) {
                     // Add to cart logic here
-                    handleAddToCart(product.id);
+                    handleAddToCart(product._id);
                   }
                 }}
               >
