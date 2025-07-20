@@ -39,7 +39,7 @@ function AppContent() {
 
         <Route path="/account/verify/:secret" element={<VerifyEmail />} />
         <Route path="/*" element={<NotFound404 />} />
-        <Route path="/setuppassword" element={<SetupPassword />} />
+        <Route path="/forgot-password/:userId" element={<SetupPassword />} />
       </Routes>
       {open && <LoginPopup />}
       {openRegisterPopUp && <RegisterPage />}

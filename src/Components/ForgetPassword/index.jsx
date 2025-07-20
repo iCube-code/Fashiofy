@@ -23,6 +23,7 @@ function ForgetPassword() {
         try {
             const response = await axios.post(`${BACKEND_URI}/user/account/forgot-password`, { email });
             toast.success(response.data.message || "Reset Link sent to your email");
+            handleCloseForgetPassword();
         }
         catch (error) {
             const errorMsg = error.response?.data?.error || "Something went wrong. Please try again.";
