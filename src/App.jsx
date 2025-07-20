@@ -16,9 +16,10 @@ import Otp from "./Components/OTP";
 import VerifyEmail from "./Pages/verifyEmail";
 import Orders from "./Components/Orders/Orders";
 import SetupPassword from "./Screens/SetupPassword";
+import ManageProducts from "./Screens/Products/ManageProducts";
 
 function AppContent() {
-  const { open, openRegisterPopUp, openForgetPassword, showOtp} = useContext(AuthContext);
+  const { open, openRegisterPopUp, openForgetPassword, showOtp } = useContext(AuthContext);
   let isLoggedIn = getCookie("token") !== null;
 
   return (
@@ -32,6 +33,7 @@ function AppContent() {
           <Route path="/Cart" element={<Cart />} />
           <Route element={isLoggedIn ? <Outlet /> : <NotFound404 />}>
             <Route path="/user" element={<h1>Users</h1>} />
+            <Route path="/manage-products" element={<ManageProducts />} />
           </Route>
         </Route>
 

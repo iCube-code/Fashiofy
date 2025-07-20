@@ -80,7 +80,7 @@ const SideNav = () => {
                 <RxDashboard /> <span>Dashboard</span>
               </div>
               <NavLink
-                to="/products"
+                to="/manage-products"
                 className={({ isActive }) =>
                   `flex items-center gap-3 py-2 px-2 rounded transition-colors ${isActive ? "bg-gray-800 text-white" : "hover:bg-gray-700"
                   }`
