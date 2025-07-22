@@ -1,9 +1,10 @@
 import React from 'react'
-import { FaFacebook, FaTwitter, FaYoutube, FaInstagram, FaBagShopping, FaGift, FaQuestion } from 'react-icons/fa6'
+import { FaFacebook, FaTwitter, FaYoutube, FaInstagram, FaBagShopping, FaGift, FaQuestion, FaRegHandshake } from 'react-icons/fa6'
 import { RxRocket } from "react-icons/rx";
 import { GoMention } from "react-icons/go";
 import Images from '../../assets/dev.svg'
 import './footer.css'
+import { NavLink } from 'react-router-dom';
 
 const Footer = () => {
     return (
@@ -76,6 +77,12 @@ const Footer = () => {
                 <div className='seller'>
                     <FaBagShopping />
                     <h4>Become a Seller</h4>
+                </div>
+                <div >
+                    <NavLink to="/seller-register" className='affiliate'>
+                        <FaRegHandshake  />
+                        <h4>Affiliate</h4>
+                    </NavLink>
                 </div>
                 <div className='advertise'>
                     <RxRocket />

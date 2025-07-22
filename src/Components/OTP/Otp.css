@@ -45,6 +45,10 @@
     margin-bottom: 10px;
 }
 
+.otp-box-actions button:active{
+    scale: 0.9;
+}
+
 .otp-box-body{
     display: flex;
     justify-content: center;

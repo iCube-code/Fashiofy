@@ -42,9 +42,10 @@ h3 {
     border-top: 1px solid #ccc;
 }
 
-.seller, .advertise, .gift, .question, .oururl {
+.seller, .affiliate, .advertise, .gift, .question, .oururl {
     display: flex;
     gap:7px;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
 }
