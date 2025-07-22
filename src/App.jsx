@@ -17,6 +17,7 @@ import VerifyEmail from "./Pages/verifyEmail";
 import Orders from "./Components/Orders/Orders";
 import SetupPassword from "./Screens/SetupPassword";
 import ManageProducts from "./Screens/Products/ManageProducts";
+import SellerRegister from "./Screens/SellerRegister";
 
 function AppContent() {
   const { open, openRegisterPopUp, openForgetPassword, showOtp } = useContext(AuthContext);
@@ -34,6 +35,7 @@ function AppContent() {
           <Route element={isLoggedIn ? <Outlet /> : <NotFound404 />}>
             <Route path="/user" element={<h1>Users</h1>} />
             <Route path="/manage-products" element={<ManageProducts />} />
+            <Route path="/seller-register" element={<SellerRegister/>} />
           </Route>
         </Route>
 
