@@ -1,11 +1,14 @@
-import React, { useState } from "react";
-import { fashiofyData } from "../../data/index";
+import React, { useState,useEffect } from "react";
 import ProductCard from "../ProductCard";
+import axios from "axios";
+import { getCookie } from "../../utils/cookies";
+import { BsCart } from "react-icons/bs";
+import { toast } from "react-toastify";
+
 
 function Orders() {
-  const [orders, setOrders] = useState(
-    fashiofyData.filter((product) => product.wishList)
-  );
+  const [orders, setOrders] = useState([]);
+  const [isEmpty, setIsEmpty] = useState(false);
 
   const incrementQty = (id) => {
     setOrders((prev) =>
@@ -28,41 +31,41 @@ function Orders() {
       alert("Item already in cart");
     } else {
       product.inCart = true;
-      alert(`${product.name} added to cart!`);
+      alert(`${ product.name } added to cart!`);
     }
   };
 
 
-   useEffect(() => {
+  useEffect(() => {
     const getOrders = async () => {
       try {
         const token = getCookie("token");
         const response = await axios.get(
-          `${import.meta.env.VITE_BACKEND_URI}/products/orders/fetch`,
+          `${ import.meta.env.VITE_BACKEND_URI }/products/orders/fetch`,
 
           {
             headers: {
-              Authorization: `Bearer ${token}`,
+              Authorization: `Bearer ${ token }`,
             },
-          }
+    }
         );
-        if (response.status === 404) {
-          setIsEmpty(true);
-        } else if (response.status === 200) {
-          setOrders(response.data.data);
-          setIsEmpty(false);
-        } else {
-          toast.error('Unexpected response while loading order products');
-        }
-      } catch (e) {
-        setIsEmpty(true);
-        console.log(e.response?.data?.message ?? 'Failed to load order products');
-      }
+  if (response.status === 404) {
+    setIsEmpty(true);
+  } else if (response.status === 200) {
+    setOrders(response.data.data);
+    setIsEmpty(false);
+  } else {
+    toast.error('Unexpected response while loading order products');
+  }
+} catch (e) {
+  setIsEmpty(true);
+  console.log(e.response?.data?.message ?? 'Failed to load order products');
+}
     };
-    getOrders();
+getOrders();
   }, [])
-
-  return (
+console.log(orders);
+return (
   <div className="mx-auto p-8">
     {isEmpty ? (
       <div className="flex gap-3 items-center">
@@ -87,7 +90,7 @@ function Orders() {
             onAddToCart={handleAddToCart}
           />
         </div>
-      </div> 
+      </div>
     )}
   </div>
 );
