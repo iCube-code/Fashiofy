@@ -121,8 +121,8 @@ function Products() {
   };
 
   return (
-    <div className="mx-auto p-4">
-      <div className="flex items-center justify-between text-center">
+    <>
+      <div className="flex items-center justify-between p-5">
         <h1 className="text-3xl font-bold mb-6">Products</h1>
         <span className="text-2xl font-medium mb-6">
           <Filter
@@ -138,7 +138,7 @@ function Products() {
           />
         </span>
       </div>
-
+    <div className="mx-auto p-4">
       {Loading ? (
         <div className="flex justify-center items-center h-96">
           <div className="h-12 w-12 animate-spin rounded-full border-4 border-blue-500 border-t-transparent" />
@@ -224,6 +224,7 @@ function Products() {
         </div>
       )}
     </div>
+        </>
   );
 }
 
