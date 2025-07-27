@@ -12,13 +12,20 @@ import { FaFilter } from "react-icons/fa";
 
 import Rating from "@mui/material/Rating";
 
-export default function Filter() {
-  const [anchorEl, setAnchorEl] = useState(null);
+
+export default function Filter({
+  sort,
+  setSort,
+  rating,
+  setRating,
+  minPrice,
+  setMinPrice,
+  maxPrice,
+  setMaxPrice,
+  onApply,
+}) {
+  const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
-  const [sort, setSort] = useState("High to Low");
-  const [rating, setRating] = useState(0);
-  const [minPrice, setMinPrice] = useState(500);
-  const [maxPrice, setMaxPrice] = useState(5000);
 
   const handleClick = (event) => setAnchorEl(event.currentTarget);
   const handleClose = () => setAnchorEl(null);
@@ -28,12 +35,11 @@ export default function Filter() {
     setRating(0);
     setMinPrice(500);
     setMaxPrice(5000);
+    onApply(); // reset filter
   };
 
   const handleApply = () => {
-    console.log("Sort:", sort);
-    console.log("Rating:", rating);
-    console.log("Price Range:", minPrice, "-", maxPrice);
+    onApply();
     handleClose();
   };
 
