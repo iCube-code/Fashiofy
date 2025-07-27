@@ -84,7 +84,7 @@ function Orders() {
                 <div>Total</div>
               </div>
               <ProductCard
-                type="wishlist"
+                type="orders"
                 products={orders}
                 incrementQty={incrementQty}
                 decrementQty={decrementQty}
