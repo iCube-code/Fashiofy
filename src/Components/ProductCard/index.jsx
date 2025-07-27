@@ -12,8 +12,8 @@ function ProductCard({ products, type, incrementQty, decrementQty, onAddToCart }
           <div className="flex gap-4 items-center">
             <div className="w-20 h-20 sm:w-24 sm:h-24 bg-gray-100 rounded-xl overflow-hidden">
               <img
-                 src={product.images?.[0] ?? "/placeholder.png"}
-                  alt={product.name}
+                src={product.images?.[0] ?? "/placeholder.png"}
+                alt={product.name}
                 className="w-full h-full object-contain"
               />
             </div>
@@ -31,23 +31,26 @@ function ProductCard({ products, type, incrementQty, decrementQty, onAddToCart }
           </div>
 
           {/* Quantity */}
-          <div>
-            <div className="flex items-center">
-              <button
-                className="text-xl cursor-pointer"
-                onClick={() => decrementQty(product.fk_product_id)}
-              >
-                <CiCircleMinus className="text-2xl text-[#d49b6d]" />
-              </button>
-              <span className="px-2">{product.count}</span>
-              <button
-                className="text-xl cursor-pointer"
-                onClick={() => incrementQty(product.fk_product_id)}
-              >
-                <CiCirclePlus className="text-[#d49b6d] text-2xl" />
-              </button>
+          {type === "wishlist" && (
+            <div>
+              <div className="flex items-center">
+                <button
+                  className="text-xl cursor-pointer"
+                  onClick={() => decrementQty(product.fk_product_id)}
+                >
+                  <CiCircleMinus className="text-2xl text-[#d49b6d]" />
+                </button>
+                <span className="px-2">{product.count}</span>
+                <button
+                  className="text-xl cursor-pointer"
+                  onClick={() => incrementQty(product.fk_product_id)}
+                >
+                  <CiCirclePlus className="text-[#d49b6d] text-2xl" />
+                </button>
+              </div>
             </div>
-          </div>
+          )}
+
 
           {/* Total or Add to Cart */}
           <div className="text-gray-800 text-sm sm:text-lg font-medium">
