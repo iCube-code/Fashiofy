@@ -11,12 +11,14 @@ import { AuthContext } from "../../context/AuthContext";
 import { isValidEmail, isValidPassword } from '../../utils/validators'
 import { toast } from 'react-toastify'
 import axios from 'axios'
+import Spinner from '../Spinner';
 
 const BACKEND_URI = import.meta.env.VITE_BACKEND_URI
 
 function LoginPopup() {
 
   const [showPassword, setShowPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false)
 
   const {
     open,
@@ -48,6 +50,7 @@ function LoginPopup() {
     }
 
     try {
+      setIsLoading(true)
       // call the Login api
       let response = await axios.post(`${BACKEND_URI}/user/account/login`, {
         email,
@@ -66,6 +69,9 @@ function LoginPopup() {
       console.error("Error in Login", err)
       toast.error("Something went wrong")
     }
+    finally {
+      setIsLoading(false)
+    }
   }
 
   return (
@@ -75,75 +81,87 @@ function LoginPopup() {
         handleCloseOtp();
       }}>
 
-        <div className='dialog-box'>
-          <Button onClick={handleClose} className='dialog-close'>{<AiOutlineClose size={25} />}</Button>
-          <DialogTitle className='dialog-title'>
-            <span>Welcome Back</span>
-            <p>Please enter your Account Details</p>
-          </DialogTitle>
-          <DialogContent className="dialog-content">
+      <div className='dialog-box'>
+        <Button onClick={handleClose} className='dialog-close'>{<AiOutlineClose size={25} />}</Button>
+        <DialogTitle className='dialog-title'>
+          <span>Welcome Back</span>
+          <p>Please enter your Account Details</p>
+        </DialogTitle>
+        <DialogContent className="dialog-content">
+          <TextField
+            className="text-field"
+            autoFocus
+            label="Email"
+            id="email"
+            type="email"
+            margin="dense"
+            variant="outlined"
+            placeholder="Enter Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            fullWidth
+            autoComplete='off'
+          />
+          <div className='password-wrapper'>
             <TextField
               className="text-field"
-              autoFocus
-              label="Email"
-              id="email"
-              type="email"
+              label="Password"
+              id="password"
+              type={showPassword ? "text" : "password"}
               margin="dense"
               variant="outlined"
-              placeholder="Enter Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Enter Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               fullWidth
               autoComplete='off'
             />
-            <div className='password-wrapper'>
-              <TextField
-                className="text-field"
-                label="Password"
-                id="password"
-                type={showPassword ? "text" : "password"}
-                margin="dense"
-                variant="outlined"
-                placeholder="Enter Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                fullWidth
-                autoComplete='off'
-              />
-              <button className='eye-icon' onClick={handleEyeIcon}>
-                {showPassword ? <FaRegEye /> : <FaRegEyeSlash />}
-              </button>
-            </div>
-
-            <div className="forget-password">
-              <Link
-                onClick={() => {
-                  handleClose()
-                  handleOpenForgetPassword()
-                }}>Forgot Password?</Link>
-            </div>
-
-            <Button onClick={handleLogin} className='sign-in-button'>Sign in</Button>
-          </DialogContent>
-
-          <DialogActions className='dialog-acions'>
-            <button className='google-icon'>{<FcGoogle size={30} />}</button>
-            <button className='github-icon'>{<ImGithub size={30} />}</button>
-            <button className='facebook-icon'>{<SiFacebook size={30} />}</button>
-          </DialogActions>
-
-          <div className="flex justify-center">
-            <button
-              className="text-white cursor-pointer mt-3"
-              onClick={() => {
-                handleClose();
-                onClickOpenRegisterPopup();
-              }}
-            >
-              Create Account
+            <button className='eye-icon' onClick={handleEyeIcon}>
+              {showPassword ? <FaRegEye /> : <FaRegEyeSlash />}
             </button>
           </div>
+
+          <div className="forget-password">
+            <Link
+              onClick={() => {
+                handleClose()
+                handleOpenForgetPassword()
+              }}>Forgot Password?</Link>
+          </div>
+
+          <Button onClick={() => {
+            if (!isLoading) {
+              handleLogin()
+            }
+          }} className='sign-in-button'>
+            {
+              isLoading ?
+                <Spinner size={30} />
+                :
+                "Sign in"
+            }
+
+          </Button>
+        </DialogContent>
+
+        <DialogActions className='dialog-acions'>
+          <button className='google-icon'>{<FcGoogle size={30} />}</button>
+          <button className='github-icon'>{<ImGithub size={30} />}</button>
+          <button className='facebook-icon'>{<SiFacebook size={30} />}</button>
+        </DialogActions>
+
+        <div className="flex justify-center">
+          <button
+            className="text-white cursor-pointer mt-3"
+            onClick={() => {
+              handleClose();
+              onClickOpenRegisterPopup();
+            }}
+          >
+            Create Account
+          </button>
         </div>
+      </div>
     </Dialog>
   )
 }
