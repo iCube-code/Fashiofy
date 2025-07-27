@@ -17,6 +17,8 @@ import VerifyEmail from "./Pages/verifyEmail";
 import Orders from "./Components/Orders/Orders";
 import SetupPassword from "./Screens/SetupPassword";
 import ManageProducts from "./Screens/Products/ManageProducts";
+import ProductDetails from "./Pages/ProductDetails";
+import SellerRegister from "./Screens/SellerRegister";
 
 function AppContent() {
   const { open, openRegisterPopUp, openForgetPassword, showOtp } = useContext(AuthContext);
@@ -28,18 +30,20 @@ function AppContent() {
         <Route element={<Layout />}>
           <Route path="/" element={<HomePage />} />
           <Route path="/products" element={<Products />} />
+          <Route path="/products/:id" element={<ProductDetails />} />
           <Route path="/Wishlist" element={<Wishlist />} />
           <Route path="/Orders" element={<Orders />} />
           <Route path="/Cart" element={<Cart />} />
+          <Route path="/seller-register" element={<SellerRegister/>} />
           <Route element={isLoggedIn ? <Outlet /> : <NotFound404 />}>
             <Route path="/user" element={<h1>Users</h1>} />
-            <Route path="/manage-products" element={<ManageProducts />} />
+            <Route path="/manage-products" element={<ManageProducts />} />            
           </Route>
         </Route>
 
         <Route path="/account/verify/:secret" element={<VerifyEmail />} />
         <Route path="/*" element={<NotFound404 />} />
-        <Route path="/setuppassword" element={<SetupPassword />} />
+        <Route path="/forgot-password/:userId" element={<SetupPassword />} />
       </Routes>
       {open && <LoginPopup />}
       {openRegisterPopUp && <RegisterPage />}
