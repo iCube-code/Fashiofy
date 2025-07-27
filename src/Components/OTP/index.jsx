@@ -5,7 +5,8 @@ import axios from 'axios'
 import { setCookie } from '../../utils/cookies'
 import useTimer from '../../hooks/useTimer'
 import { AuthContext } from '../../context/AuthContext'
-import {  Dialog } from '@mui/material'
+import { Dialog } from '@mui/material'
+import Spinner from '../Spinner'
 
 const BACKEND_URI = import.meta.env.VITE_BACKEND_URI
 
@@ -14,6 +15,7 @@ function Otp() {
     const [otp, setOtp] = useState(['', '', '', '', '', ''])
     const otpRef = useRef([])
     const [isResend, setIsResend] = useState(false)
+    const [isLoading, setIsLoading] = useState(false)
 
     const { email, password, handleOpenOtp, handleCloseOtp } = useContext(AuthContext)
 
@@ -51,7 +53,7 @@ function Otp() {
                 toast.error("Please provide the OTP")
                 return false
             }
-
+            setIsLoading(true)
             let response = await axios.post(`${BACKEND_URI}/user/account/login/verify`, {
                 otp: otpValue
             })
@@ -69,6 +71,9 @@ function Otp() {
         catch (err) {
             console.log('error in otp verification', err)
             toast.error("Something went wrong")
+        }
+        finally {
+            setIsLoading(false)
         }
 
     }
@@ -119,20 +124,31 @@ function Otp() {
                         }
                     </div>
                     <div className='otp-box-footer'>
-                          {
+                        {
                             !isResend && (
                                 (parseInt(minutes) === 0 && parseInt(seconds) === 0) ? (
-                                    <span className='text-[#11bddb] underline cursor-pointer' onClick={handleResendOTP}>Resend</span>
+                                    <span className={'text-[#11bddb] underline cursor-pointer'} onClick={handleResendOTP}>Resend</span>
                                 ) : (
                                     <span>
-                                    Resend Otp in {minutes}:{seconds}
+                                        Resend Otp in {minutes}:{seconds}
                                     </span>
                                 )
-                          )}
+                            )}
                         <p>Make sure you enter a valid OTP that was sent to your email</p>
                     </div>
                     <div className='otp-box-actions'>
-                        <button onClick={handleOTPVerify}>Validate</button>
+                        <button onClick={() => {
+                            if (!isLoading) {
+                                handleOTPVerify()
+                            }
+                        }}>
+                            {
+                                isLoading ?
+                                    <Spinner size={30} />
+                                    :
+                                    "Validate"
+                            }
+                        </button>
                     </div>
                 </div>
             </div>
