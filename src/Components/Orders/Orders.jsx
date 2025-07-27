@@ -8,7 +8,6 @@ import { toast } from "react-toastify";
 
 function Orders() {
   const [orders, setOrders] = useState([]);
-  console.log(orders);
 
   const incrementQty = (id) => {
     setOrders((prev) =>
