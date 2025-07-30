@@ -71,7 +71,7 @@ function SetupPassword() {
       return;
     }
 
-    if (!decryptedData || Date.now() > new Date(decryptedData.expiresAt).getTime()) {
+    if (!decryptedData.expiresAt || Date.now() > decryptedData.expiresAt) {
       setIsLinkValid(false);
       return;
     }
