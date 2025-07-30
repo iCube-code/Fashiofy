@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import axios from "axios";
 import { getCookie } from "../../utils/cookies";
 import { BsCart } from "react-icons/bs";
-import jwtDecode from "jwt-decode"; // 🔴 MISSING IMPORT
+import {jwtDecode} from "jwt-decode"; // 🔴 MISSING IMPORT
 
 function Cart() {
   const [cartProducts, setCartProducts] = useState([]);
