@@ -2,6 +2,8 @@ import React, {useState} from 'react'
 import './SellerRegister.css'
 import { TextField, Select, MenuItem } from '@mui/material'
 import { FaRegEyeSlash, FaRegEye } from "react-icons/fa6";
+import { isValidEmail, isValidPassword, isValidPhoneNumber } from '../../utils/validators'
+import { toast } from 'react-toastify';
 
 function SellerRegister() {
     const [firstName, setFirstName] = useState('')
@@ -12,6 +14,28 @@ function SellerRegister() {
     const [password, setPassword] = useState('')
     const [showPassword, setShowPassword] = useState('')
     const [selectedCode, setSelectedCode] = useState('+91');
+
+   function handleAffiliate () {
+      if (!isValidEmail(email)) {
+        toast.error("Please enter a valid email");
+        return;      
+      }
+
+      if(!isValidPassword(password)) {
+        toast.error("Password must be at least 8 characters long that include uppercase, lowercase, number, and special character");
+        return; 
+      }
+
+      if (!isValidPhoneNumber(phoneNumber)) {
+        toast.error("Please enter a valid 10 digit Phone Number");
+        return;        
+      }
+
+      if (!firstName || !lastName || !email || !phoneNumber || !organization || !password) {
+        toast.error ("All fields must be filled");
+        return;
+      }
+   }
 
   return (
     <div className='seller-register-screen'>
@@ -117,7 +141,7 @@ function SellerRegister() {
                     </button> 
                 </div>
                 <div className='seller-register-button'>
-                    <button>Affiliate</button>
+                    <button type='button' onClick={handleAffiliate}>Affiliate</button>
                 </div>
             </form>
         </div>

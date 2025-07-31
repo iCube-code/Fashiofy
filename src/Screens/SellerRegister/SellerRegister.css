@@ -34,7 +34,9 @@
 
 .seller-register-fields-wrap{
     display: flex;
-    gap: 10px;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
 }
 
 .seller-register-firstName, .seller-register-lastName {
@@ -48,6 +50,11 @@
 .seller-register-phoneNumber{
     flex: 1 !important;
 }
+
+.seller-register-countryCode .MuiSelect-root {
+  height: 53px;
+}
+
 
 .seller-register-button button{
     background: #c7c7c7;
