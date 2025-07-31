@@ -3,16 +3,24 @@ import { FaHeart, FaRegHeart } from "react-icons/fa";
 import axios from "axios";
 import Filter from "./Filter";
 import { useNavigate } from "react-router-dom";
-
 import { AuthContext } from "../../context/AuthContext";
 import { getCookie } from "../../utils/cookies";
 import { jwtDecode } from "jwt-decode";
 import { toast } from "react-toastify";
+
 function Products() {
   const [products, setProducts] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]);
+  const [isFilterApplied, setIsFilterApplied] = useState(false);
   const [Loading, setLoading] = useState(true);
 
+  const [sort, setSort] = useState("High to Low");
+  const [rating, setRating] = useState(0);
+  const [minPrice, setMinPrice] = useState(500);
+  const [maxPrice, setMaxPrice] = useState(5000);
+
   const { handleOpen } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   let isLoggedIn = getCookie("token") !== null;
 
@@ -22,11 +30,9 @@ function Products() {
         ? { ...product, wishListed: !product.wishListed }
         : product
     );
-
     setProducts(updatedProducts);
   };
 
-  // ADD TO CART
   const handleAddToCart = async (productId) => {
     try {
       const token = getCookie("token");
@@ -34,15 +40,8 @@ function Products() {
       const userId = decoded.id;
       const response = await axios.post(
         `${import.meta.env.VITE_BACKEND_URI}/products/cart/add`,
-        {
-          productId,
-          userId,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
+        { productId, userId },
+        { headers: { Authorization: `Bearer ${token}` } }
       );
 
       if (response.status === 200) {
@@ -53,7 +52,6 @@ function Products() {
     }
   };
 
-  // ADD TO WISHLIST
   const handleAddToWishlist = async (productId) => {
     try {
       const token = getCookie("token");
@@ -61,15 +59,8 @@ function Products() {
       const userId = decoded.id;
       const response = await axios.post(
         `${import.meta.env.VITE_BACKEND_URI}/products/wishlist/add`,
-        {
-          productId,
-          userId,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
+        { productId, userId },
+        { headers: { Authorization: `Bearer ${token}` } }
       );
 
       if (response.status === 200) {
@@ -90,6 +81,7 @@ function Products() {
 
         if (response.status === 200) {
           setProducts(response.data.data);
+          setFilteredProducts(response.data.data); // initial state
         } else {
           toast.error("Unexpected response while loading products");
         }
@@ -102,39 +94,59 @@ function Products() {
     getProducts();
   }, []);
 
+  const applyFilters = () => {
+    let filtered = [...products];
+
+    filtered = filtered.filter((p) => p.rating >= rating);
+    filtered = filtered.filter((p) => p.price >= minPrice && p.price <= maxPrice);
+
+    if (sort === "High to Low") {
+      filtered.sort((a, b) => b.price - a.price);
+    } else {
+      filtered.sort((a, b) => a.price - b.price);
+    }
+
+    setFilteredProducts(filtered);
+    setIsFilterApplied(true);
+  };
+
   function discount(price, originalPrice) {
     const dis = (price / originalPrice) * 100;
     return dis.toFixed(0);
   }
-
-  const navigate = useNavigate();
 
   const handleProductClick = (productId) => {
     navigate(`/products/${productId}`);
   };
 
   return (
-    <div className=" mx-auto p-4">
-      <div className="flex items-center justify-between text-center">
+    <>
+      <div className="flex items-center justify-between p-5">
         <h1 className="text-3xl font-bold mb-6">Products</h1>
         <span className="text-2xl font-medium mb-6">
-          <Filter />
+          <Filter
+            sort={sort}
+            setSort={setSort}
+            rating={rating}
+            setRating={setRating}
+            minPrice={minPrice}
+            setMinPrice={setMinPrice}
+            maxPrice={maxPrice}
+            setMaxPrice={setMaxPrice}
+            onApply={applyFilters}
+          />
         </span>
       </div>
+    <div className="mx-auto p-4">
       {Loading ? (
         <div className="flex justify-center items-center h-96">
-          <div
-            className="h-12 w-12 animate-spin rounded-full border-4 border-blue-500 border-t-transparent"
-            role="status"
-          >
-            <span className="sr-only">Loading...</span>
-          </div>
+          <div className="h-12 w-12 animate-spin rounded-full border-4 border-blue-500 border-t-transparent" />
         </div>
-      ) : products.length === 0 ? (
-        <div className="text-center py-10 text-lg">No Products been added</div>
+      ) : filteredProducts.length === 0 ? (
+        <div className="text-center py-10 text-lg">No Products found with applied filters.</div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {products.map((product) => (
+          {filteredProducts.map((product) => (
             <div
               key={product._id}
               className="bg-white rounded-2xl shadow hover:shadow-lg transition p-4 flex flex-col"
@@ -203,10 +215,9 @@ function Products() {
                 className="mt-4 bg-black text-white py-2 rounded-lg cursor-pointer hover:bg-gray-800 transition text-sm"
                 onClick={() => {
                   if (!isLoggedIn) {
-                    handleOpen(); // Show login popup
+                    handleOpen();
                   }
                   if (isLoggedIn) {
-                    // Add to cart logic here
                     handleAddToCart(product._id);
                   }
                 }}
@@ -218,6 +229,8 @@ function Products() {
         </div>
       )}
     </div>
+        </>
   );
 }
+
 export default Products;

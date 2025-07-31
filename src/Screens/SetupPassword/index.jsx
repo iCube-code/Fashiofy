@@ -19,7 +19,9 @@ function SetupPassword() {
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-  const [decryptedId, setDecryptedId] = useState("");
+  const [isLinkValid, setIsLinkValid] = useState(true);
+  const [decryptedData, setDecryptedData] = useState(null); 
+
   const {userId} = useParams();
   const navigate = useNavigate();
 
@@ -33,13 +35,17 @@ function SetupPassword() {
       const encryptedUserId = decodeURIComponent(userId);
       const bytes = CryptoJS.AES.decrypt(encryptedUserId, secretKey);
       const decrypted = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
+
+      if (!decrypted.expiresAt || Date.now() > decrypted.expiresAt) {
+        setIsLinkValid(false);
+        return;
+      }
   
       if (!decrypted.userid) {
         toast.error("Decryption failed. Please check your reset link.");
         return;
       }
-
-      setDecryptedId(decrypted.userid);
+      setDecryptedData(decrypted);
     } 
     catch{      
       toast.error("Something went wrong while decrypting the ID.");
@@ -65,17 +71,21 @@ function SetupPassword() {
       return;
     }
 
+    if (!decryptedData.expiresAt || Date.now() > decryptedData.expiresAt) {
+      setIsLinkValid(false);
+      return;
+    }
+
+
     try {
         const payload = {
-        userId: decryptedId, 
+        userId: decryptedData.userid, 
         newPassword,
       };
-
+      
       const response = await axios.post(`${BACKEND_URI}/user/account/reset-password`, payload);
-
       toast.success(response.data.message || "Password Reset Successfull.");
       navigate("/");
-
     }
     
     catch (error) {      
@@ -94,6 +104,8 @@ function SetupPassword() {
           <div className='setupPassword-header'>
               <span>Setup Password</span>
          </div>
+
+         {isLinkValid ? (
 
          <form onSubmit={handleSubmit}>
               <div className='setupPassword-text-field'>
@@ -138,6 +150,10 @@ function SetupPassword() {
              </div>
             
          </form>
+
+         ):(
+          <h1>Link Expired. Please request a new one.</h1>
+         )}
          </div>
     </div>
   )
