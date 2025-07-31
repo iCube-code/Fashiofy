@@ -5,8 +5,13 @@ import { GoMention } from "react-icons/go";
 import Images from '../../assets/dev.svg'
 import './footer.css'
 import { NavLink } from 'react-router-dom';
+import { getCookie } from "../../utils/cookies";
+import { jwtDecode } from 'jwt-decode'
 
 const Footer = () => {
+
+    const user = getCookie('token') !== null ? jwtDecode(getCookie('token')) : null
+
     return (
         <div className='total'>
             <div className='footerlist'>
@@ -78,12 +83,14 @@ const Footer = () => {
                     <FaBagShopping />
                     <h4>Become a Seller</h4>
                 </div>
+                {!user && (
                 <div >
                     <NavLink to="/seller-register" className='affiliate'>
                         <FaRegHandshake  />
                         <h4>Affiliate</h4>
                     </NavLink>
                 </div>
+                )}
                 <div className='advertise'>
                     <RxRocket />
                     <h4>Advertise</h4>
