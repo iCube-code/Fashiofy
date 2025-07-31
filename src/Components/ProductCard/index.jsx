@@ -31,7 +31,7 @@ function ProductCard({ products, type, incrementQty, decrementQty, onAddToCart }
           </div>
 
           {/* Quantity */}
-          {type === "wishlist" && (
+          {(type === "wishlist" || type === "cart" || type === "orders") && (
             <div>
               <div className="flex items-center">
                 <button

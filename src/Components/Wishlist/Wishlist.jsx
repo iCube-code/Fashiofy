@@ -1,11 +1,17 @@
-import React, { useState } from "react";
+import React, { useState,useEffect,useContext} from "react";
 import { fashiofyData } from "../../data/index";
 import ProductCard from "../ProductCard";
+import { AuthContext } from "../../context/AuthContext";
+import { getCookie } from "../../utils/cookies";
+
 
 function Wishlist() {
   const [wishlistProducts, setWishlistProducts] = useState(
     fashiofyData.filter((product) => product.wishList)
   );
+   const [loginPopup, setLoginPopup] = useState(false);
+    const { handleOpen } = useContext(AuthContext);
+    const isLoggedIn = getCookie("token") !== null;
 
   const incrementQty = (id) => {
     setWishlistProducts((prev) =>
@@ -31,7 +37,15 @@ function Wishlist() {
     alert(`${product.name} added to cart!`);
   }
 };
+ useEffect(() => {
+      if (!isLoggedIn && !loginPopup) {
+        handleOpen(); // show login popup
+        setLoginPopup(true);
+        return;
+      }
+  }, [isLoggedIn, handleOpen, loginPopup]);
 
+  if (!isLoggedIn) return null;
 
   return (
     <div className="max-w-7xl mx-auto p-6 bg-gray-50">

@@ -1,13 +1,19 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import ProductCard from "../ProductCard";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { getCookie } from "../../utils/cookies";
 import { BsCart } from "react-icons/bs";
+import { AuthContext } from "../../context/AuthContext";
 
 function Cart() {
   const [cartProducts, setCartProducts] = useState([]);
   const [isEmpty, setIsEmpty] = useState(false);
+  const [loginPopup, setLoginPopup] = useState(false);
+  const { handleOpen } = useContext(AuthContext);
+  const isLoggedIn = getCookie("token") !== null;
+
+
 
   const incrementQty = (id) => {
     setCartProducts((prev) =>
@@ -35,6 +41,11 @@ function Cart() {
 
   useEffect(() => {
     const getCartProducts = async () => {
+      if (!isLoggedIn && !loginPopup) {
+        handleOpen(); // show login popup
+        setLoginPopup(true);
+        return;
+      }
       try {
         const token = getCookie("token");
         const response = await axios.get(
@@ -60,7 +71,9 @@ function Cart() {
       }
     };
     getCartProducts();
-  }, [])
+  }, [isLoggedIn, handleOpen, loginPopup]);
+
+  if (!isLoggedIn) return null;
 
   return (
     <div className=" mx-auto p-8">
