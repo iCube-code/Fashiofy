@@ -31,13 +31,13 @@ function AppContent() {
           <Route path="/" element={<HomePage />} />
           <Route path="/products" element={<Products />} />
           <Route path="/products/:id" element={<ProductDetails />} />
-          <Route path="/Wishlist" element={<Wishlist />} />
-          <Route path="/Orders" element={<Orders />} />
-          <Route path="/Cart" element={<Cart />} />
-          <Route path="/seller-register" element={<SellerRegister/>} />
+          <Route path="/seller-register" element={<SellerRegister />} />
           <Route element={isLoggedIn ? <Outlet /> : <NotFound404 />}>
             <Route path="/user" element={<h1>Users</h1>} />
-            <Route path="/manage-products" element={<ManageProducts />} />            
+            <Route path="/manage-products" element={<ManageProducts />} />
+            <Route path="/Wishlist" element={<Wishlist />} />
+            <Route path="/Orders" element={<Orders />} />
+            <Route path="/Cart" element={<Cart />} />
           </Route>
         </Route>
 

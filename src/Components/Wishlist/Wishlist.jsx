@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState} from "react";
 import { fashiofyData } from "../../data/index";
 import ProductCard from "../ProductCard";
 
@@ -6,7 +6,7 @@ function Wishlist() {
   const [wishlistProducts, setWishlistProducts] = useState(
     fashiofyData.filter((product) => product.wishList)
   );
-
+   
   const incrementQty = (id) => {
     setWishlistProducts((prev) =>
       prev.map((item) =>
@@ -31,8 +31,7 @@ function Wishlist() {
     alert(`${product.name} added to cart!`);
   }
 };
-
-
+ 
   return (
     <div className="max-w-7xl mx-auto p-6 bg-gray-50">
       <h1 className="text-3xl font-bold mb-8">Wishlist</h1>

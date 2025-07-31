@@ -57,7 +57,6 @@ function Products() {
       const token = getCookie("token");
       const decoded = jwtDecode(token);
       const userId = decoded.id;
-
       const response = await axios.post(
         `${import.meta.env.VITE_BACKEND_URI}/products/wishlist/add`,
         { productId, userId },
@@ -161,17 +160,23 @@ function Products() {
                 <button
                   onClick={() => {
                     if (!isLoggedIn) {
-                      handleOpen();
+                      handleOpen(); // Show login popup
+                      return; // Exit early
                     }
-                    if (isLoggedIn && !product.wishListed) {
+                    if (!product.wishList) {
+                      // Add to wishlist
                       handleAddToWishlist(product._id);
                       toggleWishlist(product._id);
+                    } else {
+                      // Remove from wishlist
+                      // toggleWishlist(product._id); // Uncomment when needed
                     }
                   }}
                   className="absolute top-2 right-2 text-xl text-red-500 z-10 cursor-pointer"
                 >
                   {product.wishListed ? <FaHeart /> : <FaRegHeart />}
                 </button>
+
               </div>
 
               <div
