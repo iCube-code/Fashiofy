@@ -1,17 +1,13 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import ProductCard from "../ProductCard";
 import axios from "axios";
 import { getCookie } from "../../utils/cookies";
 import { BsCart } from "react-icons/bs";
 import { toast } from "react-toastify";
-import { AuthContext } from "../../context/AuthContext";
 
 function Orders() {
   const [orders, setOrders] = useState([]);
   const [isEmpty, setIsEmpty] = useState(false);
-  const [loginPopup, setLoginPopup] = useState(false);
-  const { handleOpen } = useContext(AuthContext);
-  const isLoggedIn = getCookie("token") !== null;
   const incrementQty = (id) => {
     setOrders((prev) =>
       prev.map((item) =>
@@ -37,14 +33,8 @@ function Orders() {
     }
   };
 
-
   useEffect(() => {
     const getOrders = async () => {
-      if (!isLoggedIn && !loginPopup) {
-        handleOpen(); // show login popup
-        setLoginPopup(true);
-        return;
-      }
       try {
         const token = getCookie("token");
         const response = await axios.get(
@@ -70,9 +60,7 @@ function Orders() {
       }
     };
     getOrders();
-  }, [isLoggedIn, handleOpen, loginPopup]);
-
-  if (!isLoggedIn) return null;
+  }, []);
 
   return (
     <div className="mx-auto p-8">

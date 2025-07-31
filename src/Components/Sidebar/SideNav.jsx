@@ -18,6 +18,8 @@ const SideNav = () => {
 
   const { handleOpen } = useContext(AuthContext);
   const [isExpand, setIsExpand] = useState(false);
+  let isLoggedIn = getCookie("token") !== null;
+
 
   const user = getCookie('token') !== null ? jwtDecode(getCookie('token')) : null
   const handleExpand = () => setIsExpand(prev => !prev);
@@ -135,7 +137,12 @@ const SideNav = () => {
         {/* Options Section */}
         <div className="px-4">
           <NavLink
-            to="/Orders"
+            to={isLoggedIn ? "/Orders" : ""}
+            onClick={() => {
+              if (!isLoggedIn) {
+                handleOpen();
+              }
+            }}
             className={({ isActive }) =>
               `flex items-center gap-3 py-2 px-2 rounded transition-colors ${isActive ? "bg-gray-800 text-white" : "hover:bg-gray-700"
               }`
@@ -144,7 +151,12 @@ const SideNav = () => {
             <BsCartCheckFill /> <span>Orders</span>
           </NavLink>
           <NavLink
-            to="/Cart"
+            to= {isLoggedIn ? "/Cart" : ""}
+             onClick={() => {
+              if (!isLoggedIn) {
+                handleOpen();
+              }
+            }}
             className={({ isActive }) =>
               `flex items-center gap-3 py-2 px-2 rounded transition-colors ${isActive ? "bg-gray-800 text-white" : "hover:bg-gray-700"
               }`
@@ -154,7 +166,12 @@ const SideNav = () => {
             <span>Cart</span>
           </NavLink>
           <NavLink
-            to="/wishlist"
+            to= {isLoggedIn ? "/wishlist" : ""}
+             onClick={() => {
+              if (!isLoggedIn) {
+                handleOpen();
+              }
+            }}
             className={({ isActive }) =>
               `flex items-center gap-3 py-2 px-2 rounded transition-colors ${isActive ? "bg-gray-800 text-white" : "hover:bg-gray-700"
               }`
@@ -197,12 +214,12 @@ const SideNav = () => {
                 <svg className="flex-none size-4 text-gray-400 hover:text-white" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="1" /><circle cx="12" cy="5" r="1" /><circle cx="12" cy="19" r="1" /></svg>
               </button>
               {isExpand ? (
-                <div className="absolute top-full right-0 mt-1 bg-white shadow-md rounded-lg z-10"
+                <div className="absolute bottom-8 right-0 mt-1 bg-white shadow-md rounded-lg z-10"
                   role="menu"
                   aria-orientation="vertical"
                 >
                   <div>
-                    <button onClick={handleLogout} className=" py-1 pl-10 pr-20 text-start rounded-lg font-semibold text-gray-600 cursor-pointer hover:text-black font-bold">
+                    <button onClick={handleLogout} className="text-sm py-1 px-2 text-start rounded-lg font-semibold text-gray-600 cursor-pointer hover:text-black font-bold">
                       Logout
                     </button>
                   </div>
