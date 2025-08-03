@@ -6,6 +6,7 @@ import { getCookie } from "../../utils/cookies";
 import { BsCart } from "react-icons/bs";
 import {jwtDecode} from "jwt-decode"; // 🔴 MISSING IMPORT
 
+
 function Cart() {
   const [cartProducts, setCartProducts] = useState([]);
   const [isEmpty, setIsEmpty] = useState(false);
