@@ -35,9 +35,9 @@ function AppContent() {
           <Route element={isLoggedIn ? <Outlet /> : <NotFound404 />}>
             <Route path="/user" element={<h1>Users</h1>} />
             <Route path="/manage-products" element={<ManageProducts />} />
-            <Route path="/Wishlist" element={<Wishlist />} />
-            <Route path="/Orders" element={<Orders />} />
-            <Route path="/Cart" element={<Cart />} />
+            <Route path="/wishlist" element={<Wishlist />} />
+            <Route path="/orders" element={<Orders />} />
+            <Route path="/cart" element={<Cart />} />
           </Route>
         </Route>
 

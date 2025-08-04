@@ -1,5 +1,5 @@
 import logo from "../../assets/logo-1.jpeg";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { RxDashboard } from "react-icons/rx";
 import { TbBrandProducthunt } from "react-icons/tb";
 import { MdOutlineReviews } from "react-icons/md";
@@ -13,20 +13,41 @@ import { AuthContext } from "../../context/AuthContext";
 import { getCookie, deleteCookie } from "../../utils/cookies";
 import { jwtDecode } from 'jwt-decode';
 import { RiGalleryView2 } from "react-icons/ri";
+import { useNavigate } from 'react-router-dom'
 
 const SideNav = () => {
 
+  const navigate = useNavigate()
+
+  const location = useLocation()
+
   const { handleOpen } = useContext(AuthContext);
+
   const [isExpand, setIsExpand] = useState(false);
+
   let isLoggedIn = getCookie("token") !== null;
 
-
   const user = getCookie('token') !== null ? jwtDecode(getCookie('token')) : null
+
   const handleExpand = () => setIsExpand(prev => !prev);
+
   function handleLogout() {
     setIsExpand(prev => !prev);
     deleteCookie('token');
   }
+
+  function checkActive(path) {
+
+    const urlPath = location.pathname + location.search
+
+    if (urlPath === path) {
+      return true
+    }
+
+    return false
+
+  }
+
   return (
     <div className="w-56 h-screen bg-black text-white flex flex-col justify-between mb-1 overflow-y-auto">
       {/* Logo */}
@@ -40,51 +61,43 @@ const SideNav = () => {
       <div className="flex-1">
         {/* Menu Section */}
         <div className="px-4 pt-4">
-          <NavLink
-            to="/products"
-            className={({ isActive }) =>
-              `flex items-center gap-3 py-2 px-2 rounded transition-colors ${isActive ? "bg-gray-800 text-white" : "hover:bg-gray-700"
-              }`
+          <span
+            onClick={() => navigate('/products')}
+            className={`flex items-center gap-3 py-2 px-2 rounded transition-colors cursor-pointer ${checkActive('/products') ? "bg-gray-800 text-white" : "hover:bg-gray-700"}`
             }
           >
             <RiGalleryView2 /> <span>All Products</span>
-          </NavLink>
-          <NavLink
-            to="/products?category=mens"
-            className={({ isActive }) =>
-              `flex items-center gap-3 py-2 px-2 rounded transition-colors ${isActive ? "bg-gray-800 text-white" : "hover:bg-gray-700"
-              }`
+          </span>
+          <span
+            onClick={() => navigate('/products?category=mens')}
+            className={`flex items-center gap-3 py-2 px-2 rounded transition-colors cursor-pointer ${checkActive('/products?category=mens') ? "bg-gray-800 text-white" : "hover:bg-gray-700"}`
             }
           >
             <GiCharacter /> <span>Mens</span>
-          </NavLink>
-          <NavLink
-            to="/products?category=womens"
-            className={({ isActive }) =>
-              `flex items-center gap-3 py-2 px-2 rounded transition-colors ${isActive ? "bg-gray-800 text-white" : "hover:bg-gray-700"
-              }`
+          </span>
+          <span
+            onClick={() => navigate("/products?category=womens")}
+            className={`flex items-center gap-3 py-2 px-2 rounded transition-colors cursor-pointer ${checkActive("/products?category=womens") ? "bg-gray-800 text-white" : "hover:bg-gray-700"}`
             }
           >
             <GrRestroomWomen /> <span>Womens</span>
-          </NavLink>
-          <NavLink
-            to="/products?category=kids"
-            className={({ isActive }) =>
-              `flex items-center gap-3 py-2 px-2 rounded transition-colors ${isActive ? "bg-gray-800 text-white" : "hover:bg-gray-700"
+          </span>
+          <span
+            onClick={() => navigate("/products?category=kids")}
+            className={`flex items-center gap-3 py-2 px-2 rounded transition-colors cursor-pointer ${checkActive("/products?category=kids") ? "bg-gray-800 text-white" : "hover:bg-gray-700"
               }`
             }
           >
             <FaChildReaching /> <span>Kids</span>
-          </NavLink>
-          <NavLink
-            to="/products?category=accessories"
-            className={({ isActive }) =>
-              `flex items-center gap-3 py-2 px-2 rounded transition-colors ${isActive ? "bg-gray-800 text-white" : "hover:bg-gray-700"
+          </span>
+          <span
+            onClick={() => navigate("/products?category=accessories")}
+            className={`flex items-center gap-3 py-2 px-2 rounded transition-colors cursor-pointer ${checkActive("/products?category=accessories") ? "bg-gray-800 text-white" : "hover:bg-gray-700"
               }`
             }
           >
             <FaBoxOpen /> <span>Accessories</span>
-          </NavLink>
+          </span>
           <hr className="border-gray-700 my-3 mx-[-16px]" />
         </div>
 
@@ -96,39 +109,36 @@ const SideNav = () => {
               <div className="flex items-center gap-3 py-2 cursor-pointer px-2 hover:bg-gray-700 rounded">
                 <RxDashboard /> <span>Dashboard</span>
               </div>
-              <NavLink
-                to="/manage-products"
-                className={({ isActive }) =>
-                  `flex items-center gap-3 py-2 px-2 rounded transition-colors ${isActive ? "bg-gray-800 text-white" : "hover:bg-gray-700"
+              <span
+                onClick={() => navigate("/manage-products")}
+                className={`flex items-center gap-3 py-2 px-2 rounded transition-colors cursor-pointer ${checkActive("/manage-products") ? "bg-gray-800 text-white" : "hover:bg-gray-700"
                   }`
                 }
               >
                 <TbBrandProducthunt /> <span>Products</span>
-              </NavLink>
-              <NavLink
-                to="/Reviews"
-                className={({ isActive }) =>
-                  `flex items-center gap-3 py-2 px-2 rounded transition-colors ${isActive ? "bg-gray-800 text-white" : "hover:bg-gray-700"
+              </span>
+              <span
+                onClick={() => navigate("/reviews")}
+                className={`flex items-center gap-3 py-2 px-2 rounded transition-colors cursor-pointer ${checkActive("/reviews") ? "bg-gray-800 text-white" : "hover:bg-gray-700"
                   }`
                 }
               >
                 <MdOutlineReviews /> <span>Reviews</span>
-              </NavLink>
+              </span>
               <hr className="border-gray-700 my-3 mx-[-16px]" />
             </>
           )}
 
           {user?.role === "Admin" && (
             <>
-              <NavLink
-                to="/Users"
-                className={({ isActive }) =>
-                  `flex items-center gap-3 py-2 px-2 rounded transition-colors ${isActive ? "bg-gray-800 text-white" : "hover:bg-gray-700"
+              <span
+                onClick={() => navigate("/users")}
+                className={`flex items-center gap-3 py-2 px-2 rounded transition-colors cursor-pointer ${checkActive("/users") ? "bg-gray-800 text-white" : "hover:bg-gray-700"
                   }`
                 }
               >
                 <FaRegUser /> <span>Users</span>
-              </NavLink>
+              </span>
               <hr className="border-gray-700 my-3 mx-[-16px]" />
             </>
           )}
@@ -136,50 +146,50 @@ const SideNav = () => {
 
         {/* Options Section */}
         <div className="px-4">
-          <NavLink
-            to={isLoggedIn ? "/Orders" : ""}
+          <span
             onClick={() => {
               if (!isLoggedIn) {
                 handleOpen();
+              } else {
+                navigate('/Orders')
               }
             }}
-            className={({ isActive }) =>
-              `flex items-center gap-3 py-2 px-2 rounded transition-colors ${isActive ? "bg-gray-800 text-white" : "hover:bg-gray-700"
+            className={`flex items-center gap-3 py-2 px-2 rounded transition-colors cursor-pointer ${checkActive("/orders") ? "bg-gray-800 text-white" : "hover:bg-gray-700"
               }`
             }
           >
             <BsCartCheckFill /> <span>Orders</span>
-          </NavLink>
-          <NavLink
-            to= {isLoggedIn ? "/Cart" : ""}
-             onClick={() => {
+          </span>
+          <span
+            onClick={() => {
               if (!isLoggedIn) {
                 handleOpen();
+              } else {
+                navigate('/Cart')
               }
             }}
-            className={({ isActive }) =>
-              `flex items-center gap-3 py-2 px-2 rounded transition-colors ${isActive ? "bg-gray-800 text-white" : "hover:bg-gray-700"
+            className={`flex items-center gap-3 py-2 px-2 rounded transition-colors cursor-pointer ${checkActive("/cart") ? "bg-gray-800 text-white" : "hover:bg-gray-700"
               }`
             }
           >
             <FaShoppingCart />
             <span>Cart</span>
-          </NavLink>
-          <NavLink
-            to= {isLoggedIn ? "/wishlist" : ""}
-             onClick={() => {
+          </span>
+          <span
+            onClick={() => {
               if (!isLoggedIn) {
                 handleOpen();
+              } else {
+                navigate('/wishlist')
               }
             }}
-            className={({ isActive }) =>
-              `flex items-center gap-3 py-2 px-2 rounded transition-colors ${isActive ? "bg-gray-800 text-white" : "hover:bg-gray-700"
+            className={`flex items-center gap-3 py-2 px-2 rounded transition-colors cursor-pointer ${checkActive("/wishlist") ? "bg-gray-800 text-white" : "hover:bg-gray-700"
               }`
             }
           >
             <FaHeart />
             <span>Wishlist</span>
-          </NavLink>
+          </span>
         </div>
       </div>
 
@@ -187,7 +197,7 @@ const SideNav = () => {
 
       <div className="p-4 border-t border-gray-700">
         {user !== null ? (
-          <div className=" relative inline-flex flex justify-between gap-5">
+          <div className=" relative flex justify-between gap-5">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 bg-gray-600 rounded-full flex items-center justify-center text-white text-sm">
                 {user.avatar ? (
@@ -197,10 +207,10 @@ const SideNav = () => {
                     className="w-10 h-10 rounded-full object-cover"
                   />
                 ) : (
-                  <span>{user?.userName.charAt(0)}</span>
+                  <span className="capitalize">{user?.userName.charAt(0) + user?.userName.split(' ')[1].charAt(0)}</span>
                 )}
               </div>
-              <span className="text-sm font-medium truncate">{user.userName}</span>
+              <span className="text-sm font-medium truncate capitalize">{user.userName}</span>
             </div>
             <div className=" relative inline-flex">
               <button
@@ -214,12 +224,12 @@ const SideNav = () => {
                 <svg className="flex-none size-4 text-gray-400 hover:text-white" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="1" /><circle cx="12" cy="5" r="1" /><circle cx="12" cy="19" r="1" /></svg>
               </button>
               {isExpand ? (
-                <div className="absolute bottom-8 right-0 mt-1 bg-white shadow-md rounded-lg z-10"
+                <div className="absolute bottom-8 -right-2 mt-1 bg-white shadow-md rounded-lg z-10 py-1 px-3"
                   role="menu"
                   aria-orientation="vertical"
                 >
                   <div>
-                    <button onClick={handleLogout} className="text-sm py-1 px-2 text-start rounded-lg font-semibold text-gray-600 cursor-pointer hover:text-black font-bold">
+                    <button onClick={handleLogout} className="text-sm py-1 px-2 text-start rounded-lg font-semibold text-gray-600 cursor-pointer hover:text-black">
                       Logout
                     </button>
                   </div>

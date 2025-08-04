@@ -20,7 +20,8 @@ function ProductDetails() {
         );
         setProduct(res.data.data);
       } catch (err) {
-        toast.error("Failed to Load product");
+        console.error("Failed to Load product", err)
+        toast.error("Something went wrong");
       }
     };
 
@@ -71,11 +72,10 @@ function ProductDetails() {
             key={index}
             src={img}
             alt={`thumb-${index}`}
-            className={`h-24 w-fit object-contain rounded-md cursor-pointer border-2 ${
-              index === selectedImageIndex
-                ? "border-blue-600"
-                : "border-gray-200"
-            }`}
+            className={`h-24 w-fit object-contain rounded-md cursor-pointer border-2 ${index === selectedImageIndex
+              ? "border-blue-600"
+              : "border-gray-200"
+              }`}
             onClick={() => setSelectedImageIndex(index)}
           />
         ))}
@@ -93,11 +93,10 @@ function ProductDetails() {
               key={index}
               src={img}
               alt={`thumb-${index}`}
-              className={`h-20 w-20 object-cover rounded-md cursor-pointer flex-shrink-0 border-2 ${
-                index === selectedImageIndex
-                  ? "border-blue-600"
-                  : "border-gray-200"
-              }`}
+              className={`h-20 w-20 object-cover rounded-md cursor-pointer flex-shrink-0 border-2 ${index === selectedImageIndex
+                ? "border-blue-600"
+                : "border-gray-200"
+                }`}
               onClick={() => setSelectedImageIndex(index)}
             />
           ))}
