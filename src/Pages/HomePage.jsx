@@ -1,4 +1,4 @@
-import React, { Suspense} from "react";
+import React, { Suspense } from "react";
 import HoodieCanvas from "../Components/Model_3D/HoodieCanvas";
 import { Link, NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
@@ -8,7 +8,7 @@ function Home() {
 
   const navigate = useNavigate()
 
-  function handleNavigateProducts(){
+  function handleNavigateProducts() {
     navigate('/products')
   }
 
@@ -53,9 +53,9 @@ function Home() {
                 </NavLink>
               </div>
             </div>
-            <div >
+            <div className="w-40 h-50 overflow-hidden">
               <img src="https://rukminim2.flixcart.com/image/832/832/xif0q/t-shirt/z/4/w/l-31677849-here-now-original-imahbk8judgjq6hp.jpeg?q=70&crop=false" alt="image1"
-                className="w-50 h-50 "
+                className="w-full"
               />
             </div>
           </div>
@@ -69,9 +69,9 @@ function Home() {
                 </NavLink>
               </div>
             </div>
-            <div >
+            <div className="w-40 h-50 overflow-hidden">
               <img src="https://rukminim2.flixcart.com/image/832/832/xif0q/kurta/o/g/h/xl-dp313-saloni-creation-original-imah38hcdghdqvcg.jpeg?q=70&crop=false" alt="image2"
-                className="w-50 h-50"
+                className="w-full"
               />
             </div>
           </div>
@@ -85,9 +85,9 @@ function Home() {
                 </NavLink>
               </div>
             </div>
-            <div >
+            <div className="w-40 h-50 overflow-hidden">
               <img src="https://rukminim2.flixcart.com/image/832/832/xif0q/shoe/i/d/w/8-8545-8-killer-sea-green-original-imah7spdwsy3zete.jpeg?q=70&crop=false" alt="image3"
-                className="w-50 h-50"
+                className="w-full"
               />
             </div>
           </div>
@@ -101,9 +101,9 @@ function Home() {
                 </NavLink>
               </div>
             </div>
-            <div >
+            <div className="w-40 h-50 overflow-hidden">
               <img src="https://m.media-amazon.com/images/I/61TIYhUzobL.AC_UL480_FMwebp_QL65.jpg" alt="image4"
-                className="w-50"
+                className="w-full"
               />
             </div>
           </div>
@@ -117,9 +117,9 @@ function Home() {
                 </NavLink>
               </div>
             </div>
-            <div >
+            <div className="w-40 h-50 overflow-hidden">
               <img src="https://m.media-amazon.com/images/I/81x0yUp0T+L.AC_UL480_FMwebp_QL65.jpg" alt="image5"
-                className="w-50 h-50"
+                className="w-full"
               />
             </div>
           </div>
@@ -133,9 +133,9 @@ function Home() {
                 </NavLink>
               </div>
             </div>
-            <div >
+            <div className="w-40 h-50 overflow-hidden">
               <img src="https://m.media-amazon.com/images/I/81xyPfQrT1L.AC_UL480_FMwebp_QL65.jpg" alt="image6"
-                className="w-50 h-50"
+                className="w-full"
               />
             </div>
           </div>
