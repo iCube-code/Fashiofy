@@ -31,7 +31,7 @@ function ProductCard({ products, type, incrementQty, decrementQty, onAddToCart }
           </div>
 
           {/* Quantity */}
-          {(type === "wishlist" || type === "cart" || type === "orders") && (
+          {(type === "cart" || type === "orders") && (
             <div>
               <div className="flex items-center">
                 <button
@@ -51,10 +51,13 @@ function ProductCard({ products, type, incrementQty, decrementQty, onAddToCart }
             </div>
           )}
 
-
           {/* Total or Add to Cart */}
           <div className="text-gray-800 text-sm sm:text-lg font-medium">
-            ₹{product.count * parseInt(product.fk_product_id.price)}
+            {type === "wishlist" ? (<div>
+              ₹{product.fk_product_id.price}
+            </div>) : (<div>
+              ₹{product.count * parseInt(product.fk_product_id.price)}
+            </div>)}
             {type === "wishlist" && (
               <div className="mt-2">
                 <button
