@@ -1,45 +1,48 @@
-.seller-register-screen{
+.seller-register-screen {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  height: 100vh; 
+  height: 100vh;
 }
 
-.seller-register-header{
-  margin-right: 500px;
+.seller-register-header {
   font-weight: 600;
-  font-size: 24px;
+  font-size: 20px;
+  display: block;
+  margin-bottom: 20px;
 }
 
-.seller-register-box{
-    border: 1px solid #c7c7c7;
-    width: 500px;
-    padding: 20px;
-    margin: 20px;
+.seller-register-box {
+  border: 1px solid #c7c7c7;
+  width: 500px;
+  padding: 20px;
+  margin: 20px;
 }
 
-.seller-register-fields{
+.seller-register-fields {
   margin-bottom: 10px;
 }
-.seller-register-fields .MuiInputBase-input{
+
+.seller-register-fields .MuiInputBase-input {
   color: black !important;
   font-size: 14px !important;
 }
 
-.seller-register-fields .MuiFormLabel-root{
+.seller-register-fields .MuiFormLabel-root {
   color: black !important;
   font-size: 14px !important;
 }
 
-.seller-register-fields-wrap{
-    display: flex;
-    gap: 20px;
-    justify-content: center;
-    align-items: center;
+.seller-register-fields-wrap {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
 }
 
-.seller-register-firstName, .seller-register-lastName {
+.seller-register-firstName,
+.seller-register-lastName {
   flex: 1 !important;
 }
 
@@ -47,8 +50,8 @@
   width: 100%;
 }
 
-.seller-register-phoneNumber{
-    flex: 1 !important;
+.seller-register-phoneNumber {
+  flex: 1 !important;
 }
 
 .seller-register-countryCode .MuiSelect-root {
@@ -56,42 +59,41 @@
 }
 
 
-.seller-register-button button{
-    background: #c7c7c7;
-    color: black;
-    font-weight: 600;
-    padding: 10px 25px;
-    border-radius: 10px;
-    cursor: pointer;
-    user-select: none;
-    margin-top: 40px;
-    margin-right: 10px;
+.seller-register-button button {
+  background: #c7c7c7;
+  color: black;
+  font-weight: 600;
+  padding: 10px 25px;
+  border-radius: 10px;
+  cursor: pointer;
+  user-select: none;
+  margin-top: 40px;
+  margin-right: 10px;
 
 }
 
-.seller-register-button{
-    display: flex;
-    justify-content: flex-end;
+.seller-register-button {
+  display: flex;
+  justify-content: flex-end;
 }
 
-.seller-register-button button:active{
-    scale: 0.9;
+.seller-register-button button:active {
+  scale: 0.9;
 }
 
 .seller-register-phoneNumber input[type="number"]::-webkit-outer-spin-button,
 .seller-register-phoneNumber input[type="number"]::-webkit-inner-spin-button {
   -webkit-appearance: none;
-  
+
 }
 
-.seller-register-password{
+.seller-register-password {
   position: relative;
 }
 
-.seller-register-eye-icon{
+.seller-register-eye-icon {
   position: absolute;
   right: 12px;
   top: 25px;
   cursor: pointer;
 }
-
