@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import { FaPlus } from "react-icons/fa";
 import { FaRegEdit } from "react-icons/fa";
 import { MdKeyboardArrowRight } from "react-icons/md";
-import AddProducts from "../../Components/AddProductsPopup/AddProducts";
+import AddProducts from "../../Components/AddProductsPopup";
 
 
 function ManageProducts() {
@@ -45,10 +45,11 @@ function ManageProducts() {
         };
         getProducts();
     }, []);
+
     function handleAddProduct() {
-        //TO DO
         setOpenAddProduct(true)
     }
+    
     function handleToEdit() {
         //TO DO
     }
@@ -63,12 +64,11 @@ function ManageProducts() {
                         <span>Add Product</span>
                     </button>
                           {openAddProduct && (
-        <AddProducts
-          open={openAddProduct}
-          onClose={() => setOpenAddProduct(false)}
-        />
-      )}
-
+                            <AddProducts
+                            open={openAddProduct}
+                            onClose={() => setOpenAddProduct(false)}
+                            />
+                           )}
                 </div>
             </div>
             {currentProducts.length === 0 ?
