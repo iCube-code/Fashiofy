@@ -19,6 +19,7 @@ import SetupPassword from "./Screens/SetupPassword";
 import ManageProducts from "./Screens/Products/ManageProducts";
 import ProductDetails from "./Pages/ProductDetails";
 import SellerRegister from "./Screens/SellerRegister";
+import AddProducts from "./Components/AddProductsPopup/AddProducts";
 
 function AppContent() {
   const { open, openRegisterPopUp, openForgetPassword, showOtp } = useContext(AuthContext);
@@ -38,6 +39,7 @@ function AppContent() {
             <Route path="/wishlist" element={<Wishlist />} />
             <Route path="/orders" element={<Orders />} />
             <Route path="/cart" element={<Cart />} />
+            <Route path="/add-products" element={<AddProducts />} />
           </Route>
         </Route>
 

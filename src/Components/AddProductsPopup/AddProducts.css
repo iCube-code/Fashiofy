@@ -1,0 +1,74 @@
+.image-slot{
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 20px 0px;
+    text-align: center;
+    border-radius: 5px;
+}
+
+.image-grid{
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 25px;
+}
+
+.upload-label {
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.upload-label:hover {
+  color: #0056b3;
+}
+
+.addProduct-dialog{
+    position: relative;
+}
+
+.addProduct-close{
+    font-size: 35px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+}
+
+.addProduct-section-wrap{
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.addProduct-description{
+     margin-bottom: 20px;
+}
+
+.addProduct-actions button{
+    background: rgb(161, 157, 157);
+    color: black;
+    font-weight: 600;
+    padding: 10px 30px;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.addProduct-actions button:active, .addProduct-close:active{
+    scale: 0.9;
+}
+
+.uniform-input {
+  width: 100%;
+  height: 56px;
+}
+
+.addProduct-size{
+    margin-top: 9px;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+}
