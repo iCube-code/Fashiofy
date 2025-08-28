@@ -1,0 +1,40 @@
+.dropdown-box {
+  position: absolute;
+  top: 90px;
+  right: 40px;
+  z-index: 1000;
+  background: white;
+  border: 2px solid black;
+  padding: 16px;
+  border-radius: 8px;
+  width: 400px;
+}
+
+.review-icon i{
+    cursor: pointer;
+    display: inline-block;
+}
+
+.review-icon i:active{
+    scale: 0.9;
+}
+
+.comment-box-button{
+    background: rgb(91, 89, 89);
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+   float: right;
+   margin-top: 10px;
+   cursor: pointer;
+}
+
+.comment-box-button:active{
+    scale: 0.9;
+}
+
+.product-row{
+    position: relative;
+}

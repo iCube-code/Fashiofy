@@ -1,12 +1,28 @@
 import { CiCircleMinus, CiCirclePlus } from "react-icons/ci";
+import { MdOutlineRateReview } from "react-icons/md";
+import React, {useState} from "react";
+import './CommentBox.css'
+import { TextField } from '@mui/material';
 
 function ProductCard({ products, type, incrementQty, decrementQty, onAddToCart }) {
+    const [dropDown, setdropDown] = useState(null)
+    const [comment, setComment] = useState({})
+  
+    function handleDropDown(productId) {
+      setdropDown(prev => prev === productId ? null : productId)
+    }
+  
+    const gridCols =
+      type === "orders"
+        ? "grid-cols-[3fr_1fr_1fr_1fr_1fr]"
+        : "grid-cols-[3fr_1fr_1fr_1fr]"; 
+    
   return (
     <div>
       {products.map((product) => (
         <div
           key={product._id}
-          className="grid grid-cols-[3fr_1fr_1fr_1fr] items-center border-b py-4"
+          className={`grid ${gridCols} items-center border-b py-4 product-row`}
         >
           {/* Product Info */}
           <div className="flex gap-4 items-center">
@@ -31,7 +47,9 @@ function ProductCard({ products, type, incrementQty, decrementQty, onAddToCart }
           </div>
 
           {/* Quantity */}
-          {(type === "cart" || type === "orders") && (
+          <div>
+          {
+            type === "cart" ? (
             <div>
               <div className="flex items-center">
                 <button
@@ -49,7 +67,13 @@ function ProductCard({ products, type, incrementQty, decrementQty, onAddToCart }
                 </button>
               </div>
             </div>
-          )}
+            ): type === "orders" ? (
+              <div  className="flex items-center justify-center h-full">
+                <span className="px-2">{product.count}</span>
+              </div>
+            ) : null
+        }
+        </div>
 
           {/* Total or Add to Cart */}
           <div className="text-gray-800 text-sm sm:text-lg font-medium">
@@ -69,8 +93,38 @@ function ProductCard({ products, type, incrementQty, decrementQty, onAddToCart }
               </div>
             )}
           </div>
+
+          {/* CommentBox */}
+          {(type === "orders") && (
+              <div className='review-icon flex justify-center items-center h-full'>
+                <i><MdOutlineRateReview size={25} onClick={() => handleDropDown(product._id)}/></i>
+                {dropDown === product._id && (
+                <div className='dropdown-box'>
+                <div className='comment-box'>
+                    <TextField
+                      className='comment-box-textfield'
+                      type='text'
+                      variant='outlined'
+                      multiline rows={4}
+                      value={comment[product._id] || ''}
+                      onChange={(e)=>setComment(prev => ({
+                                  ...prev,
+                                  [product._id]: e.target.value
+                                }))}
+                      margin='dense'
+                      placeholder='Write the comment'
+                      fullWidth           
+                    />
+                    <button className='comment-box-button'>Submit</button>
+                </div>
+                </div>
+                )}
+              </div>
+          )}
         </div>
       ))}
+
+
     </div>
   );
 }
