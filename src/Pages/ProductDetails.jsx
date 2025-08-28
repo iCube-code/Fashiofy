@@ -5,6 +5,7 @@ import { getCookie } from "../utils/cookies";
 import { jwtDecode } from "jwt-decode";
 import { AuthContext } from "../context/AuthContext";
 import { toast } from "react-toastify";
+import { VscStarFull } from "react-icons/vsc";
 
 function ProductDetails() {
   const { id } = useParams();
@@ -52,6 +53,16 @@ function ProductDetails() {
     }
   };
 
+  function handleRating(rating){
+    const stars = [];
+    for(let i=1;i<=rating;i++){
+      stars.push(
+       <VscStarFull 
+       key={i}
+       />);
+    }
+    return stars;
+  }
   if (!product)
     return (
       <div className="flex justify-center items-center h-96">
@@ -152,46 +163,29 @@ function ProductDetails() {
         <div className="mt-10">
           <h2 className="text-lg font-semibold mb-4">Customer Reviews</h2>
           <div className="space-y-4">
-            <div className="flex items-start gap-4 border border-gray-200 p-4 rounded-md shadow-sm bg-gray-50">
-              <div className="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold">
-                R
-              </div>
-              <div>
-                <div className="flex items-center gap-2">
-                  <p className="font-medium text-gray-900">Ravi</p>
-                  <div className="flex text-yellow-500 text-sm">
-                    <span>★ ★ ★ ★ ☆</span>
-                  </div>
+            {product.comments.map((comment) => (
+              <div
+              key = {comment._id}
+              className="flex items-start gap-4 border border-gray-200 p-4 rounded-md shadow-sm bg-gray-50">
+                <div className="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold">
+                  {comment.user[0].toUpperCase()}
                 </div>
-                <p className="text-xs text-gray-400 mt-0.5">
-                  Reviewed on July 5, 2025
-                </p>
-                <p className="text-gray-700 text-sm mt-2 leading-relaxed">
-                  Nice product! Build quality feels premium. Worth the price.
-                </p>
-              </div>
-            </div>
-
-            <div className="flex items-start gap-4 border border-gray-200 p-4 rounded-md shadow-sm bg-gray-50">
-              <div className="w-10 h-10  bg-green-500 rounded-full flex items-center justify-center text-white font-bold">
-                S
-              </div>
-              <div>
-                <div className="flex items-center gap-2">
-                  <p className="font-medium text-gray-900">Suresh</p>
-                  <div className="flex text-yellow-500 text-sm">
-                    <span>★ ★ ★ ★ ★</span>
+                <div>
+                  <div className="flex items-center gap-2">
+                    <p className="font-medium text-gray-900">{comment.user}</p>
+                    <div className="flex text-yellow-500 text-sm">
+                      <span className="flex flex-row">{handleRating(comment.rating)}</span>
+                    </div>
                   </div>
+                  <p className="text-xs text-gray-400 mt-0.5">
+                    Reviewed on July 5, 2025
+                  </p>
+                  <p className="text-gray-700 text-sm mt-2 leading-relaxed">
+                    {comment.comment}
+                  </p>
                 </div>
-                <p className="text-xs text-gray-400 mt-0.5">
-                  Reviewed on July 2, 2025
-                </p>
-                <p className="text-gray-700 text-sm mt-2 leading-relaxed">
-                  Quality was great 👌 Delivery was fast. Satisfied with the
-                  product.
-                </p>
               </div>
-            </div>
+            ))}
           </div>
         </div>
       </div>
