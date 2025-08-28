@@ -19,7 +19,7 @@ import SetupPassword from "./Screens/SetupPassword";
 import ManageProducts from "./Screens/Products/ManageProducts";
 import ProductDetails from "./Pages/ProductDetails";
 import SellerRegister from "./Screens/SellerRegister";
-
+import UserScreen from "./Components/UserScreen/UserScreen"
 function AppContent() {
   const { open, openRegisterPopUp, openForgetPassword, showOtp } = useContext(AuthContext);
   let isLoggedIn = getCookie("token") !== null;
@@ -33,7 +33,7 @@ function AppContent() {
           <Route path="/products/:id" element={<ProductDetails />} />
           <Route path="/seller-register" element={<SellerRegister />} />
           <Route element={isLoggedIn ? <Outlet /> : <NotFound404 />}>
-            <Route path="/user" element={<h1>Users</h1>} />
+            <Route path="/user" element={<UserScreen />} />
             <Route path="/manage-products" element={<ManageProducts />} />
             <Route path="/wishlist" element={<Wishlist />} />
             <Route path="/orders" element={<Orders />} />
