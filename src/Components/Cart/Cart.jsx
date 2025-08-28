@@ -83,7 +83,7 @@ function Cart() {
         }
       );
 
-      if (response.status === 200) {
+      if (response.status === 201) {
         toast.info("Order placed successfully!");
       } else {
         toast.error("Internal server error in orderProduct");
@@ -143,7 +143,7 @@ function Cart() {
               <button
                 className="bg-[#FF6F61] text-white font-semibold py-3 rounded-full w-full hover:bg-[#e15d51] transition cursor-pointer"
                 onClick={() =>
-                  handleOrder(cartProducts.map((item) => item.fk_product_id))
+                  handleOrder(cartProducts.map((item) => item.fk_product_id._id))
                 }
               >
                 PLACE ORDER
